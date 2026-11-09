@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#243b53">
+  <title>Agenda Docente</title>
+  <style>
+    :root {
+      --fondo: #f3f6fa;
+      --panel: #ffffff;
+      --texto: #243447;
+      --suave: #64748b;
+      --primario: #294c70;
+      --primario-claro: #e8f0f8;
+      --borde: #dce4ed;
+      --sombra: 0 8px 24px rgba(25, 45, 70, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .contenedor { width: min(1100px, 100%); margin: auto; padding: 18px; }
+   header {
+    background: linear-gradient(135deg, #243b53, #426783);
+    color: white;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+
+#reloj {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+    header h1 { margin: 0 0 7px; font-size: clamp(1.5rem, 4vw, 2rem); }
+    header p { margin: 0; opacity: .9; }
+
+
+/* ===== MI PERFIL: ESTILO COMPACTO TIPO MI ESPACIO ===== */
+
+.perfil {
+    margin-top: 10px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: var(--sombra);
+}
+
+.perfil-cabecera {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: -27px;
+    position: relative;
+    z-index: 1;
+}
+
+.perfil .datos .dato:first-child {
+    padding-right: 180px;
+}
+
+.perfil-cabecera h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.perfil .perfil-cabecera button {
+    background: transparent !important;
+    color: var(--primario);
+    padding: 3px 0;
+    border: none;
+    box-shadow: none;
+    font-size: .88rem;
+}
+
+.perfil .datos {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.perfil .datos .dato {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 0;
+    background: transparent !important;
+    border: none !important;
+}
+
+.perfil .dato strong {
+    flex: 0 0 155px;
+    margin: 0;
+    color: var(--suave);
+    font-size: .88rem;
+}
+
+.perfil .dato > span,
+.perfil .dato > a,
+.perfil .dato > button {
+    flex: 1;
+    min-width: 0;
+}
+
+.perfil .dato a,
+.perfil .dato button {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+    color: var(--primario);
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.perfil .dato a:hover,
+.perfil .dato button:hover {
+    text-decoration: underline;
+}
+
+.perfil-redes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 520px) {
+
+    .perfil {
+        padding: 12px;
+    }
+
+    .perfil .dato strong {
+        flex-basis: 135px;
+    }
+
+    .perfil .datos .dato {
+        gap: 7px;
+    }
+
+}
+
+
+    .acciones { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+    button, .boton {
+      border: 0; border-radius: 10px; padding: 10px 14px;
+      background: var(--primario); color: white; font-weight: 600;
+      text-decoration: none; cursor: pointer; font-size: .92rem;
+    }
+    button.secundario, .boton.secundario { background: var(--primario-claro); color: var(--primario); }
+    .secciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 18px; }
+    .seccion {
+      background: var(--panel); border: 1px solid var(--borde);
+      border-radius: 16px; padding: 20px; box-shadow: var(--sombra);
+      min-height: 190px;
+    }
+    .seccion h2 { margin: 0 0 8px; font-size: 1.25rem; }
+    .seccion p { color: var(--suave); line-height: 1.5; }
+    .novedades {
+      margin-top: 18px; padding: 18px; background: #fff;
+      border: 1px solid var(--borde); border-radius: 16px; box-shadow: var(--sombra);
+    }
+    .novedades h2 { margin: 0 0 8px; }
+    .aviso { color: var(--suave); margin: 0; line-height: 1.5; }
+    body.modo-oscuro {
+      --fondo: #17212b;
+      --panel: #243241;
+      --texto: #edf3f8;
+      --suave: #b5c2cf;
+      --primario: #8db8df;
+      --primario-claro: #34495e;
+      --borde: #405365;
+      --sombra: 0 8px 24px rgba(0, 0, 0, .22);
+    }
+    body.modo-oscuro .dato { background: #1d2a37; }
+    body.modo-oscuro .boton,
+    body.modo-oscuro button:not(.secundario) { color: #142333; }
+
+
+/* ===== APARIENCIAS DE AGENDA DOCENTE ===== */
+
+/* HORIZONTE */
+body.oceano {
+    --fondo: #06283D;
+    --panel: #24577a;
+    --texto: #ffffff;
+    --suave: #d5e8f2;
+    --primario: #347ba8;
+    --primario-claro: #194765;
+    --borde: #4b91bd;
+    --sombra: 0 6px 18px rgba(0,0,0,.45);
+    background: #06283D;
+    color: #ffffff;
+}
+
+body.oceano header {
+    background: #0B4F6C;
+}
+
+/* NATURALEZA */
+body.bosque {
+    --fondo: #102A1B;
+    --panel: #315c42;
+    --texto: #ffffff;
+    --suave: #d9eadf;
+    --primario: #427653;
+    --primario-claro: #254b34;
+    --borde: #568568;
+    --sombra: 0 6px 18px rgba(0,0,0,.45);
+    background: #102A1B;
+    color: #ffffff;
+}
+
+body.bosque header {
+    background: #1B4332;
+}
+
+/* LAVANDA */
+body.crepusculo {
+    --fondo: #2B1B3A;
+    --panel: #553b70;
+    --texto: #ffffff;
+    --suave: #e5d9ef;
+    --primario: #70518f;
+    --primario-claro: #422d59;
+    --borde: #8b6aaa;
+    --sombra: 0 6px 18px rgba(0,0,0,.45);
+    background: #2B1B3A;
+    color: #ffffff;
+}
+
+body.crepusculo header {
+    background: #4A235A;
+}
+
+/* TIERRA */
+body.biblioteca {
+    --fondo: #2A1A0A;
+    --panel: #68482f;
+    --texto: #ffffff;
+    --suave: #eadbc9;
+    --primario: #8a6445;
+    --primario-claro: #50351f;
+    --borde: #aa835e;
+    --sombra: 0 6px 18px rgba(0,0,0,.45);
+    background: #2A1A0A;
+    color: #ffffff;
+}
+
+body.biblioteca header {
+    background: #4B2E13;
+}
+
+/* MEDIANOCHE */
+body.eclipse {
+    --fondo: #111111;
+    --panel: #30343a;
+    --texto: #ffffff;
+    --suave: #d5d8dc;
+    --primario: #454b52;
+    --primario-claro: #25292e;
+    --borde: #626970;
+    --sombra: 0 6px 18px rgba(0,0,0,.55);
+    background: radial-gradient(circle at top,#2a2a2a 0%,#111 35%,#000 100%);
+    color: #ffffff;
+}
+
+body.eclipse header {
+    background: #111;
+}
+
+/* TARJETAS Y PANELES */
+body.oceano .perfil,
+body.oceano .seccion,
+body.oceano .novedades {
+    background: linear-gradient(135deg,#24577a,#347ba8);
+    border-color: #4b91bd;
+}
+
+body.bosque .perfil,
+body.bosque .seccion,
+body.bosque .novedades {
+    background: linear-gradient(135deg,#315c42,#427653);
+    border-color: #568568;
+}
+
+body.crepusculo .perfil,
+body.crepusculo .seccion,
+body.crepusculo .novedades {
+    background: linear-gradient(135deg,#553b70,#70518f);
+    border-color: #8b6aaa;
+}
+
+body.biblioteca .perfil,
+body.biblioteca .seccion,
+body.biblioteca .novedades {
+    background: linear-gradient(135deg,#68482f,#8a6445);
+    border-color: #aa835e;
+}
+
+body.eclipse .perfil,
+body.eclipse .seccion,
+body.eclipse .novedades {
+    background: linear-gradient(135deg,#30343a,#454b52);
+    border-color: #626970;
+}
+
+/* DATOS Y TEXTOS */
+body.oceano .dato,
+body.bosque .dato,
+body.crepusculo .dato,
+body.biblioteca .dato,
+body.eclipse .dato {
+    background: rgba(0,0,0,.18);
+    border-color: var(--borde);
+    color: var(--texto);
+}
+
+body.oceano .perfil h2,
+body.oceano .seccion h2,
+body.oceano .novedades h2,
+body.bosque .perfil h2,
+body.bosque .seccion h2,
+body.bosque .novedades h2,
+body.crepusculo .perfil h2,
+body.crepusculo .seccion h2,
+body.crepusculo .novedades h2,
+body.biblioteca .perfil h2,
+body.biblioteca .seccion h2,
+body.biblioteca .novedades h2,
+body.eclipse .perfil h2,
+body.eclipse .seccion h2,
+body.eclipse .novedades h2 {
+    color: #ffffff;
+}
+
+body.oceano .dato span,
+body.bosque .dato span,
+body.crepusculo .dato span,
+body.biblioteca .dato span,
+body.eclipse .dato span {
+    color: #ffffff;
+}
+
+
+/* ===== BOTONES SECUNDARIOS EN TEMAS ===== */
+
+body.oceano .acciones .secundario,
+body.bosque .acciones .secundario,
+body.crepusculo .acciones .secundario,
+body.biblioteca .acciones .secundario,
+body.eclipse .acciones .secundario {
+    color: #ffffff !important;
+    background: rgba(0, 0, 0, .18);
+    border-color: var(--borde);
+}
+
+   .perfil-cabecera {
+    margin-bottom: 8px;
+    justify-content: flex-end;
+}
+
+.perfil .datos .dato:first-child {
+    padding-right: 0;
+}
+    /* ===== POPUP DE APARIENCIA ===== */
+
+.panel-apariencia {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    width: calc(100% - 36px);
+    max-width: 390px;
+    box-sizing: border-box;
+
+    padding: 25px 20px;
+    border-radius: 22px;
+
+    background: #ffffff;
+    color: #263445;
+
+    box-shadow:
+        0 0 0 100vmax rgba(15, 25, 40, 0.65),
+        0 15px 45px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+}
+
+.panel-apariencia h2 {
+    margin: 0 0 8px;
+    font-size: 23px;
+    color: #263445;
+}
+
+.panel-apariencia p {
+    margin: 0 0 22px;
+    color: #687586;
+    font-size: 14px;
+}
+
+.opciones-temas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.opciones-temas button {
+    min-height: 65px;
+    padding: 12px 8px;
+
+    border: 1px solid #dce3eb;
+    border-radius: 14px;
+
+    background: #f5f7fa;
+    color: #263445;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.opciones-temas button:active {
+    transform: scale(0.96);
+}
+
+#btnCerrarApariencia {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #e9edf2;
+    color: #354456;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+/* ===== FIN POPUP DE APARIENCIA ===== */
+
+
+/* =====================================
+   AGENDA DOCENTE - PANTALLA PRINCIPAL
+===================================== */
+
+.agenda-contenedor {
+    width: min(1100px, 94%);
+    margin: 30px auto;
+}
+
+.agenda-encabezado {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.agenda-logo {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #e7eef8;
+    font-size: 30px;
+}
+
+.agenda-encabezado h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.agenda-subtitulo {
+    margin: 5px 0 0;
+    color: #687386;
+}
+
+.agenda-bienvenida {
+    background: white;
+    border: 1px solid #e3e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.agenda-bienvenida h2 {
+    margin: 0 0 8px;
+}
+
+.agenda-bienvenida p {
+    margin: 0;
+    color: #687386;
+}
+
+.agenda-modulos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.agenda-tarjeta {
+    background: white;
+    border: 1px solid #e3e8f0;
+    border-radius: 16px;
+    padding: 22px;
+    min-height: 155px;
+}
+
+.agenda-tarjeta-icono {
+    font-size: 27px;
+    margin-bottom: 13px;
+}
+
+.agenda-tarjeta h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+.agenda-tarjeta p {
+    margin: 0;
+    color: #687386;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+    .agenda-modulos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .agenda-encabezado h1 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 390px) {
+    .agenda-modulos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== AVISO PREVENTIVO DE VENCIMIENTO ===== */
+
+#avisoVencimientoPreventivo {
+    display: none;
+    position: relative;
+    margin: 20px 0;
+    padding: 25px 45px 25px 25px;
+    background: #332d00;
+    border: 2px solid #FFD700;
+    border-radius: 20px;
+    text-align: center;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#avisoVencimientoPreventivo h2 {
+    margin-top: 0;
+    color: #FFD700;
+}
+
+#avisoVencimientoPreventivo p {
+    margin: 12px 0;
+}
+
+#btnCerrarAvisoPreventivo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* ===== AVISO DE ACCESO VENCIDO ===== */
+
+#avisoVencimiento {
+    display: none;
+    margin: 20px 0;
+    padding: 25px;
+    background: #300;
+    border: 2px solid #F00;
+    border-radius: 20px;
+    text-align: center;
+    color: #FFF;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* ===== VENTANA DE COLABORACIÓN ===== */
+
+#popupColaboracion {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .65);
+    z-index: 5000;
+}
+
+#popupColaboracion .popupContenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 370px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: #222;
+    border: 1px solid #666;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .60);
+}
+
+#popupColaboracion h2 {
+    margin-top: 0;
+    color: #FFD700;
+}
+
+#popupColaboracion p {
+    color: #DDD;
+    margin-bottom: 15px;
+}
+
+#popupColaboracion .popupContenido button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#popupColaboracion .popupContenido button:hover {
+    background: #555;
+}
+
+#popupColaboracion .opcionColaboracion.seleccionada {
+    background: #555;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+}
+
+.perfil #usuarioCliente {
+    font-weight: 700;
+    color: var(--texto);
+}
+
+</style>
+</head>
+<body>
+  <main class="contenedor">
+
+<header>
+
+    <!-- Fecha y hora arriba de todo -->
+    <div id="reloj">
+        <div id="fechaHora">📅 --</div>
+    </div>
+
+    <!-- Título y firma -->
+    <div>
+        <h1>Agenda Docente</h1>
+        <p>By Pablo Gagliano</p>
+    </div>
+
+    <!-- Saludo personalizado -->
+    <h2 id="saludo">¡Hola!</h2>
+
+</header>
+
+<!-- PERFIL -->
+<section class="perfil" aria-label="Mi perfil">
+
+    <div class="perfil-cabecera">
+
+        <button class="secundario" id="btnApariencia" type="button">
+            🎨 Cambiar apariencia
+        </button>
+    </div>
+
+    <div class="datos">
+
+        <div class="dato">
+            <strong>📧 Usuario:</strong>
+            <span id="usuarioCliente"></span>
+        </div>
+
+        <div class="dato">
+            <strong>🛠️ Soporte:</strong>
+            <a id="btnSoporte" href="#">✉️ Enviar consulta</a>
+        </div>
+
+        <div class="dato">
+            <strong>🤝 Colaboración:</strong>
+            <a id="btnColaboracion" href="#">☕ Colaborar</a>
+        </div>
+
+        <div class="dato">
+            <strong>📱 Seguinos por:</strong>
+            <span class="perfil-redes">
+                <a id="btnInstagram" href="#" target="_blank" rel="noopener">📸 Instagram</a>
+                <a id="btnWhatsApp" href="#" target="_blank" rel="noopener">☎️ WhatsApp</a>
+            </span>
+        </div>
+
+        <div class="dato">
+            <strong>⭐ Calificanos!!</strong>
+            <button id="btnOpinion" type="button">
+                👍 Dejanos tu opinión
+            </button>
+        </div>
+
+        <div class="dato">
+            <strong>📅 Vencimiento:</strong>
+            <span id="txtVencimiento"></span>
+        </div>
+
+        <div class="dato">
+            <strong>🚦 Estado:</strong>
+            <span id="txtEstado"></span>
+        </div>
+
+        <div class="dato">
+            <strong>⏳ Restantes:</strong>
+            <span id="txtDias"></span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===== AVISO PREVENTIVO ===== -->
+
+<div id="avisoVencimientoPreventivo">
+
+    <button
+        type="button"
+        id="btnCerrarAvisoPreventivo"
+        onclick="document.getElementById('avisoVencimientoPreventivo').style.display='none';"
+        title="Cerrar"
+    >
+        ✖
+    </button>
+
+    <h2>⚠️ Tu acceso está próximo a vencer</h2>
+
+    <p>
+        Tu acceso a Agenda Docente continuará disponible hasta el
+        <span id="fechaVencimientoPreventivo"></span>.
+    </p>
+
+    <p>
+        🤝 Si querés continuar utilizando Agenda Docente,
+        podés colaborar con su renovación.
+    </p>
+
+    <p>
+        👉 Tocá 🤝 Colaborar.
+    </p>
+
+    <a class="boton" id="btnColaborarAvisoPreventivo" href="#">
+        🤝 Colaborar
+    </a>
+
+</div>
+
+<!-- ===== AVISO DE ACCESO VENCIDO ===== -->
+
+<div id="avisoVencimiento">
+
+    <h2>🔒 Período finalizado</h2>
+
+    <p>
+        Tu acceso a Agenda Docente ha llegado a su fin.
+    </p>
+
+    <p>
+        🤝 Si querés continuar utilizando Agenda Docente,
+        podés colaborar con su renovación.
+    </p>
+
+    <p>
+        👉 Tocá 🤝 Colaborar para continuar.
+    </p>
+
+    <a class="boton" id="btnColaborarVencimiento" href="#">
+        🤝 Colaborar
+    </a>
+
+</div>
+
+<!-- ===== VENTANA COLABORACIÓN ===== -->
+
+<div id="popupColaboracion" style="display:none;">
+
+    <div class="popupContenido">
+
+        <h2>
+            💙 Colaborá con<br>
+            Agenda Docente
+        </h2>
+
+        <p>
+            Si utilizás Agenda Docente y querés ayudar
+            a mantenerla activa, podés colaborar con su
+            renovación.
+        </p>
+
+        <p>
+            <strong>Hacé tu transferencia a: Mercado Pago</strong>
+        </p>
+
+        <!-- ALIAS -->
+
+        <p style="margin:4px 0;">
+            <strong>Alias:</strong>
+            <span id="aliasMercadoPago">paufer01</span>
+            <button type="button"
+                onclick="copiarDatoColaboracion('paufer01')"
+                title="Copiar alias"
+                style="display:inline-flex !important;width:auto !important;min-width:0 !important;border:none !important;background:none !important;padding:0 !important;margin:0 0 0 4px !important;font-size:15px !important;line-height:1 !important;cursor:pointer;"
+            >📋</button>
+        </p>
+
+        <!-- CVU -->
+
+        <p style="margin:4px 0;">
+            <strong>CVU:</strong>
+            <span id="cvuMercadoPago">0000003100044906201707</span>
+            <button type="button"
+                onclick="copiarDatoColaboracion('0000003100044906201707')"
+                title="Copiar CVU"
+                style="display:inline-flex !important;width:auto !important;min-width:0 !important;border:none !important;background:none !important;padding:0 !important;margin:0 0 0 4px !important;font-size:15px !important;line-height:1 !important;cursor:pointer;"
+            >📋</button>
+        </p>
+
+        <!-- TITULAR -->
+
+        <p style="margin:4px 0;">
+            <strong>A nombre de:</strong>
+            <span id="titularMercadoPago">Pablo Gagliano</span>
+        </p>
+
+        <p>
+            Después de transferir,
+            <strong>seleccioná el monto enviado</strong>
+            y presioná <strong>Continuar</strong>.
+        </p>
+
+        <p>
+            📧 Te llevaremos al correo para que nos envíes
+            los datos de la colaboración.
+        </p>
+
+        <p>
+            <strong>Seleccioná el monto transferido:</strong>
+        </p>
+
+        <button class="opcionColaboracion" data-monto="2000">
+            💙 $2.000
+        </button>
+
+        <button class="opcionColaboracion" data-monto="2500">
+            💙 $2.500
+        </button>
+
+        <button class="opcionColaboracion" data-monto="3000">
+            💙 $3.000
+        </button>
+
+        <button class="opcionColaboracion" data-monto="otro">
+            💙 Otro monto
+        </button>
+
+        <div id="contenedorOtroMonto"
+             style="display:none; margin-top:10px;">
+
+            <div style="position:relative;">
+
+                <input
+                    type="number"
+                    id="otroMontoColaboracion"
+                    placeholder="Ingresá el monto"
+                    min="1"
+                    style="width:100%;box-sizing:border-box;padding:12px 45px 12px 12px;border:none;border-radius:10px;background:#333;color:white;font-size:16px;text-align:center;"
+                >
+
+                <span
+                    id="confirmacionOtroMonto"
+                    style="display:none;position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:22px;"
+                >✅</span>
+
+            </div>
+
+        </div>
+
+        <button id="btnContinuarColaboracion">
+            📧 Continuar
+        </button>
+
+        <button id="btnCancelarColaboracion">
+            ❌ Cancelar
+        </button>
+
+    </div>
+
+</div>
+    <!-- ===== VENTANA DE APARIENCIA ===== -->
+
+    <section id="panelApariencia" class="panel-apariencia" style="display:none;">
+
+      <h2>🎨 Elegí tu apariencia</h2>
+      <p>Seleccioná el color que más te guste.</p>
+
+   <div class="opciones-temas">
+
+    <button type="button" onclick="cambiarTema('claro')">
+        ☀️ Día
+    </button>
+
+    <button type="button" onclick="cambiarTema('oceano')">
+        🌊 Horizonte
+    </button>
+
+    <button type="button" onclick="cambiarTema('bosque')">
+        🌿 Naturaleza
+    </button>
+
+    <button type="button" onclick="cambiarTema('crepusculo')">
+        💜 Lavanda
+    </button>
+
+    <button type="button" onclick="cambiarTema('biblioteca')">
+        🟤 Tierra
+    </button>
+
+    <button type="button" onclick="cambiarTema('eclipse')">
+        🌙 Medianoche
+    </button>
+
+</div>
+
+      <div style="margin-top:15px;text-align:center;">
+
+    <button type="button" id="btnGuardarTema">
+        💾 Guardar cambios
+    </button>
+
+    <div id="mensajeTema"
+         style="display:none;margin-top:10px;color:#228B22;font-size:14px;font-weight:bold;">
+        ✔ Configuración guardada
+    </div>
+
+    <button type="button" class="secundario" id="btnCerrarApariencia">
+        ❌ Cancelar
+    </button>
+
+</div>
+
+    </section>
+
+    <!-- ===== FIN VENTANA DE APARIENCIA ===== -->
+
+
+    <section class="secciones" aria-label="Secciones principales">
+      <article class="seccion">
+        <h2>📘 Agenda Docente</h2>
+        <p>Acá vamos a incorporar las herramientas de organización y seguimiento docente.</p>
+        <button type="button" disabled>Próximamente</button>
+      </article>
+      <article class="seccion">
+        <h2>🌐 Sitios Docentes</h2>
+        <p>Acá vamos a reunir los sitios y recursos útiles para la tarea docente.</p>
+        <button type="button" disabled>Próximamente</button>
+      </article>
+    </section>
+
+    <!-- NOVEDADES reemplaza el antiguo bloque de patrocinadores.
+         Su contenido común se conectará más adelante a una fuente de datos compartida. -->
+    <section class="novedades" aria-labelledby="tituloNovedades">
+      <h2 id="tituloNovedades">📢 Novedades</h2>
+      <p class="aviso" id="listaNovedades">Todavía no hay novedades publicadas.</p>
+    </section>
+
+  </main>
+
+  <script>
+    // ==================================================
+    // CONFIGURACIÓN DEL PERFIL
+    // Estos datos se personalizan en la copia HTML de cada docente.
+    // ==================================================
+    const nombre = "pABLO";
+    const usuario = "AD01";
+    const correoSoporte = "ppffgaglian@gmail.com";
+    const asuntoSoporte = "Consulta - Agenda Docente";
+    const vencimiento = "2026-11-31"; // Formato: AAAA-MM-DD
+
+    // Completar con los enlaces oficiales cuando estén definidos.
+    const urlColaboracion = "#";
+    const urlInstagram = "#";
+    const urlWhatsApp = "#";
+
+// =================================
+// FECHA Y HORA
+// =================================
+function actualizarFechaHora() {
+    const ahora = new Date();
+
+    const opciones = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    };
+
+    let fecha = ahora.toLocaleDateString("es-AR", opciones);
+    fecha = fecha.charAt(0).toUpperCase() + fecha.slice(1);
+
+    const hora = ahora.toLocaleTimeString("es-AR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+    });
+
+    document.getElementById("fechaHora").textContent =
+        `📅 ${fecha} • 🕒 ${hora}`;
+}
+
+
+actualizarFechaHora();
+setInterval(actualizarFechaHora, 1000);
+
+
+    function actualizarSaludo() {
+      const hora = new Date().getHours();
+      let saludo = "¡Buenas noches";
+      if (hora >= 6 && hora < 12) saludo = "¡Buenos días";
+      else if (hora >= 12 && hora < 20) saludo = "¡Buenas tardes";
+      document.getElementById("saludo").textContent = `${saludo}, ${nombre}!`;
+    }
+
+function actualizarDatosPerfil() {
+
+    document.getElementById("usuarioCliente").textContent = usuario;
+
+    const partes = vencimiento.split("-").map(Number);
+
+    const fechaVencimiento = new Date(
+        partes[0],
+        partes[1] - 1,
+        partes[2]
+    );
+
+    const hoy = new Date();
+
+    hoy.setHours(0, 0, 0, 0);
+    fechaVencimiento.setHours(0, 0, 0, 0);
+
+    document.getElementById("txtVencimiento").textContent =
+        `${String(partes[2]).padStart(2, "0")}/${String(partes[1]).padStart(2, "0")}/${partes[0]}`;
+
+    const diasRestantes = Math.round(
+        (fechaVencimiento - hoy) / 86400000
+    );
+
+    let estado = "🟢 Vigente";
+    let restantes = `${diasRestantes} días`;
+
+    if (diasRestantes < 0) {
+
+        estado = "🔴 Vencido";
+
+        const diasVencido = Math.abs(diasRestantes);
+
+        restantes = `Vencido hace ${diasVencido} ${
+            diasVencido === 1 ? "día" : "días"
+        }`;
+
+    } else if (diasRestantes === 0) {
+
+        estado = "🟠 Vence hoy";
+        restantes = "Vence hoy";
+
+    } else if (diasRestantes <= 10) {
+
+        estado = "🟡 Próximo a vencer";
+
+        restantes = `${diasRestantes} ${
+            diasRestantes === 1 ? "día" : "días"
+        }`;
+
+    } else {
+
+        restantes = `${diasRestantes} días`;
+
+    }
+
+    document.getElementById("txtEstado").textContent = estado;
+    document.getElementById("txtDias").textContent = restantes;
+
+    // CONTROL DE ACCESO VENCIDO
+
+   const filasAcciones = document.querySelectorAll(
+    ".perfil .dato:nth-child(2), " +
+    ".perfil .dato:nth-child(3), " +
+    ".perfil .dato:nth-child(4), " +
+    ".perfil .dato:nth-child(5)"
+);
+
+const secciones = document.querySelector(".secciones");
+
+if (diasRestantes < 0) {
+
+    filasAcciones.forEach(fila => {
+        fila.style.display = "none";
+    });
+
+    secciones.style.display = "none";
+
+    document.getElementById("avisoVencimiento").style.display = "block";
+
+} else {
+
+    filasAcciones.forEach(fila => {
+        fila.style.display = "flex";
+    });
+
+    secciones.style.display = "grid";
+
+    document.getElementById("avisoVencimiento").style.display = "none";
+
+}
+
+    // AVISO PREVENTIVO: EXACTAMENTE 5 DÍAS ANTES
+
+    if (diasRestantes === 5) {
+
+        document.getElementById("fechaVencimientoPreventivo").textContent =
+            `${String(partes[2]).padStart(2, "0")}/${String(partes[1]).padStart(2, "0")}/${partes[0]}`;
+
+        document.getElementById("avisoVencimientoPreventivo").style.display = "block";
+
+    } else {
+
+        document.getElementById("avisoVencimientoPreventivo").style.display = "none";
+
+    }
+
+}
+
+
+    document.getElementById("btnSoporte").href =
+      `mailto:${correoSoporte}?subject=${encodeURIComponent(asuntoSoporte)}`;
+    document.getElementById("btnColaboracion").href = urlColaboracion;
+    document.getElementById("btnColaborarVencimiento").href = urlColaboracion;
+    document.getElementById("btnColaborarAvisoPreventivo").href = urlColaboracion;
+    document.getElementById("btnInstagram").href = urlInstagram;
+    document.getElementById("btnWhatsApp").href = urlWhatsApp;
+
+    document.getElementById("btnOpinion").addEventListener("click", () => {
+      alert("En esta sección vamos a configurar el enlace para dejar una opinión.");
+    });
+
+   
+    actualizarSaludo();
+   actualizarDatosPerfil();
+
+// ===== APARIENCIA =====
+
+const btnApariencia = document.getElementById("btnApariencia");
+const panelApariencia = document.getElementById("panelApariencia");
+const btnCerrarApariencia = document.getElementById("btnCerrarApariencia");
+const btnGuardarTema = document.getElementById("btnGuardarTema");
+
+let temaAnterior = document.body.className;
+
+function cambiarTema(tema) {
+
+    document.body.classList.remove(
+        "modo-oscuro",
+        "oceano",
+        "bosque",
+        "crepusculo",
+        "biblioteca",
+        "eclipse"
+    );
+
+    if (tema !== "claro") {
+        document.body.classList.add(tema);
+    }
+}
+
+btnApariencia.addEventListener("click", function() {
+    temaAnterior = document.body.className;
+    panelApariencia.style.display = "block";
+});
+
+btnCerrarApariencia.addEventListener("click", function() {
+    document.body.className = temaAnterior;
+    panelApariencia.style.display = "none";
+});
+
+btnGuardarTema.addEventListener("click", function() {
+
+    const temas = [
+        "oceano",
+        "bosque",
+        "crepusculo",
+        "biblioteca",
+        "eclipse"
+    ];
+
+    const temaSeleccionado = temas.find(tema =>
+        document.body.classList.contains(tema)
+    ) || "claro";
+
+    localStorage.setItem("configuracionTema", JSON.stringify({
+        modo: "manual",
+        tema: temaSeleccionado
+    }));
+
+    temaAnterior = document.body.className;
+
+const mensaje = document.getElementById("mensajeTema");
+
+mensaje.style.display = "block";
+
+setTimeout(function() {
+
+    mensaje.style.display = "none";
+
+    panelApariencia.style.display = "none";
+
+}, 1000);
+
+});
+
+// ===== COLABORACIÓN =====
+
+function abrirPopupColaboracion() {
+    document.getElementById("popupColaboracion").style.display = "block";
+}
+
+// Conectar los tres botones de colaboración
+
+[
+    "btnColaboracion",
+    "btnColaborarAvisoPreventivo",
+    "btnColaborarVencimiento"
+].forEach(function(id) {
+
+    const boton = document.getElementById(id);
+
+    if (boton) {
+        boton.addEventListener("click", function(event) {
+            event.preventDefault();
+            abrirPopupColaboracion();
+        });
+    }
+
+});
+
+document.getElementById("btnCancelarColaboracion").onclick = function() {
+    document.getElementById("popupColaboracion").style.display = "none";
+};
+
+let montoColaboracion = "";
+
+document.querySelectorAll(".opcionColaboracion").forEach(function(boton) {
+
+    boton.onclick = function() {
+
+        document.querySelectorAll(".opcionColaboracion").forEach(function(item) {
+            item.classList.remove("seleccionada");
+        });
+
+        boton.classList.add("seleccionada");
+
+        if (boton.dataset.monto === "otro") {
+
+            document.getElementById("contenedorOtroMonto").style.display = "block";
+            document.getElementById("otroMontoColaboracion").focus();
+            montoColaboracion = "";
+
+        } else {
+
+            document.getElementById("contenedorOtroMonto").style.display = "none";
+            document.getElementById("otroMontoColaboracion").value = "";
+            montoColaboracion = boton.dataset.monto;
+
+        }
+    };
+});
+
+function copiarDatoColaboracion(dato) {
+    navigator.clipboard.writeText(dato);
+}
+
+  </script>
+</body>
+</html>
