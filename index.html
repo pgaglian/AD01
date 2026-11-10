@@ -427,8 +427,7 @@ body.eclipse .acciones .secundario {
 .opciones-temas button {
     min-height: 65px;
     padding: 12px 8px;
-
-    border: 1px solid #dce3eb;
+        border: 1px solid #dce3eb;
     border-radius: 14px;
 
     background: #f5f7fa;
@@ -682,6 +681,86 @@ body.eclipse .acciones .secundario {
     color: #FFD700;
 }
 
+/* ===== POPUPS DE SOPORTE Y OPINIÓN (MISMA LÓGICA QUE MI ESPACIO) ===== */
+
+#popupSoporte,
+#popupOpinion {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .65);
+    z-index: 5000;
+}
+
+#popupSoporte .popupContenido,
+#popupOpinion .popupContenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    max-width: 90vw;
+    max-height: 90vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: #222;
+    border: 1px solid #666;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .60);
+}
+
+#popupSoporte .popupContenido h2,
+#popupOpinion .popupContenido h2 {
+    margin-top: 0;
+    color: #FFD700;
+}
+
+#popupSoporte .popupContenido p,
+#popupOpinion .popupContenido p {
+    color: #DDD;
+    margin-bottom: 20px;
+}
+
+#popupSoporte .popupContenido button,
+#popupOpinion .popupContenido button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#popupSoporte .popupContenido button:hover,
+#popupOpinion .popupContenido button:hover {
+    background: #555;
+}
+
+#popupOpinion .opcionOpinion.seleccionada {
+    background: #555;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+}
+
+#popupOpinion textarea {
+    width: 100%;
+    min-height: 90px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    font-size: 15px;
+    resize: vertical;
+}
+
 .perfil #usuarioCliente {
     font-weight: 700;
     color: var(--texto);
@@ -778,7 +857,7 @@ body.eclipse .acciones .secundario {
     <button
         type="button"
         id="btnCerrarAvisoPreventivo"
-        onclick="document.getElementById('avisoVencimientoPreventivo').style.display='none';"
+         onclick="document.getElementById('avisoVencimientoPreventivo').style.display='none';"
         title="Cerrar"
     >
         ✖
@@ -947,6 +1026,76 @@ body.eclipse .acciones .secundario {
     </div>
 
 </div>
+
+<!-- ===== VENTANA DE SELECCIÓN DE CORREO ===== -->
+
+<div id="popupSoporte" style="display:none;">
+
+    <div class="popupContenido">
+
+        <h2>✉️ Enviar consulta</h2>
+
+        <p id="textoCorreo">¿Cómo desea enviar la consulta?</p>
+
+        <button type="button" id="btnGmail">📧 Gmail</button>
+
+        <button type="button" id="btnOutlook">📨 Outlook</button>
+
+        <button type="button" id="btnMailto">💻 Programa de correo</button>
+
+        <button type="button" id="btnCerrarSoporte">❌ Cerrar</button>
+
+    </div>
+
+</div>
+
+<!-- ===== VENTANA DE OPINIÓN ===== -->
+
+<div id="popupOpinion" style="display:none;">
+
+    <div class="popupContenido">
+
+        <h2>⭐ ¡Tu opinión nos ayuda!</h2>
+
+        <p>😊 Nos gustaría saber qué te pareció.</p>
+
+        <p>Elegí la opción que mejor representa tu experiencia:</p>
+
+        <button type="button" class="opcionOpinion" data-valor="Excelente">
+            😍 ¡Excelente!
+        </button>
+
+        <button type="button" class="opcionOpinion" data-valor="Muy buena">
+            😊 ¡Muy buena!
+        </button>
+
+        <button type="button" class="opcionOpinion" data-valor="Buena">
+            🙂 Buena
+        </button>
+
+        <button type="button" class="opcionOpinion" data-valor="Puede mejorar">
+            💡 Puede mejorar
+        </button>
+
+        <p style="margin-top:20px;">💬 ¿Querés contarnos algo más?</p>
+
+        <textarea
+            id="comentarioOpinion"
+            placeholder="Tu comentario es opcional..."
+        ></textarea>
+
+        <button type="button" id="btnEnviarOpinion">
+            📤 Enviar opinión
+        </button>
+
+        <button type="button" id="btnCancelarOpinion">
+            ❌ Cancelar
+        </button>
+
+    </div>
+
+</div>
+
     <!-- ===== VENTANA DE APARIENCIA ===== -->
 
     <section id="panelApariencia" class="panel-apariencia" style="display:none;">
@@ -1031,16 +1180,18 @@ body.eclipse .acciones .secundario {
     // CONFIGURACIÓN DEL PERFIL
     // Estos datos se personalizan en la copia HTML de cada docente.
     // ==================================================
-    const nombre = "pABLO";
+    const nombre = "Pablito";
     const usuario = "AD01";
     const correoSoporte = "ppffgaglian@gmail.com";
     const asuntoSoporte = "Consulta - Agenda Docente";
+    let tipoEnvioCorreo = "soporte";
+    let valoracionOpinion = "";
     const vencimiento = "2026-11-31"; // Formato: AAAA-MM-DD
 
     // Completar con los enlaces oficiales cuando estén definidos.
     const urlColaboracion = "#";
-    const urlInstagram = "#";
-    const urlWhatsApp = "#";
+    const urlInstagram = "https://www.instagram.com/gagliapa/";
+    const urlWhatsApp = "https://wa.me/5491125851870";
 
 // =================================
 // FECHA Y HORA
@@ -1106,7 +1257,7 @@ function actualizarDatosPerfil() {
     );
 
     let estado = "🟢 Vigente";
-    let restantes = `${diasRestantes} días`;
+        let restantes = `${diasRestantes} días`;
 
     if (diasRestantes < 0) {
 
@@ -1191,19 +1342,311 @@ if (diasRestantes < 0) {
 }
 
 
-    document.getElementById("btnSoporte").href =
-      `mailto:${correoSoporte}?subject=${encodeURIComponent(asuntoSoporte)}`;
     document.getElementById("btnColaboracion").href = urlColaboracion;
     document.getElementById("btnColaborarVencimiento").href = urlColaboracion;
     document.getElementById("btnColaborarAvisoPreventivo").href = urlColaboracion;
     document.getElementById("btnInstagram").href = urlInstagram;
     document.getElementById("btnWhatsApp").href = urlWhatsApp;
 
-    document.getElementById("btnOpinion").addEventListener("click", () => {
-      alert("En esta sección vamos a configurar el enlace para dejar una opinión.");
+    // ==================================================
+    // SOPORTE, COLABORACIÓN, REDES Y OPINIÓN
+    // Se conserva el HTML y la presentación de Agenda Docente.
+    // Se recupera el funcionamiento de Mi Espacio, adaptado
+    // al contenido y a los datos propios de Agenda Docente.
+    // ==================================================
+
+    // OPINIÓN
+    document.getElementById("btnOpinion").onclick = function() {
+        document.getElementById("popupOpinion").style.display = "block";
+    };
+
+    document.querySelectorAll(".opcionOpinion").forEach(function(boton) {
+        boton.onclick = function() {
+            document.querySelectorAll(".opcionOpinion").forEach(function(item) {
+                item.classList.remove("seleccionada");
+            });
+
+            boton.classList.add("seleccionada");
+            valoracionOpinion = boton.dataset.valor;
+        };
     });
 
-   
+    document.getElementById("btnEnviarOpinion").onclick = function() {
+        tipoEnvioCorreo = "opinion";
+
+        if (valoracionOpinion === "") {
+            alert("😊 Elegí una opción para contarnos cómo fue tu experiencia.");
+            return;
+        }
+
+        document.querySelector("#popupSoporte h2").innerText = "⭐ Enviar opinión";
+        document.getElementById("textoCorreo").innerText =
+            "¿Cómo desea enviar la opinión?";
+
+        document.getElementById("popupOpinion").style.display = "none";
+        document.getElementById("popupSoporte").style.display = "block";
+    };
+
+    document.getElementById("btnCancelarOpinion").onclick = function() {
+        document.getElementById("popupOpinion").style.display = "none";
+        valoracionOpinion = "";
+
+        document.querySelectorAll(".opcionOpinion").forEach(function(item) {
+            item.classList.remove("seleccionada");
+        });
+
+        document.getElementById("comentarioOpinion").value = "";
+    };
+
+    // SOPORTE
+    document.getElementById("btnSoporte").onclick = function(event) {
+        event.preventDefault();
+        tipoEnvioCorreo = "soporte";
+
+        document.querySelector("#popupSoporte h2").innerText =
+            "✉️ Enviar consulta";
+        document.getElementById("textoCorreo").innerText =
+            "¿Cómo desea enviar la consulta?";
+        document.getElementById("popupSoporte").style.display = "block";
+    };
+
+    document.getElementById("btnCerrarSoporte").onclick = function() {
+        document.getElementById("popupSoporte").style.display = "none";
+    };
+
+    // COLABORACIÓN
+    function abrirPopupColaboracion() {
+        document.getElementById("popupColaboracion").style.display = "block";
+    }
+
+    [
+        "btnColaboracion",
+        "btnColaborarAvisoPreventivo",
+        "btnColaborarVencimiento"
+    ].forEach(function(id) {
+        const boton = document.getElementById(id);
+
+        if (boton) {
+            boton.onclick = function(event) {
+                event.preventDefault();
+                abrirPopupColaboracion();
+            };
+        }
+    });
+
+    document.getElementById("btnCancelarColaboracion").onclick = function() {
+        document.getElementById("popupColaboracion").style.display = "none";
+    };
+
+    let montoColaboracion = "";
+    let otroMontoValidado = false;
+
+    const confirmacionOtroMonto =
+        document.getElementById("confirmacionOtroMonto");
+    const inputOtroMonto =
+        document.getElementById("otroMontoColaboracion");
+
+    document.querySelectorAll(".opcionColaboracion").forEach(function(boton) {
+        boton.onclick = function() {
+            document.querySelectorAll(".opcionColaboracion").forEach(function(item) {
+                item.classList.remove("seleccionada");
+            });
+
+            boton.classList.add("seleccionada");
+
+            if (boton.dataset.monto === "otro") {
+                document.getElementById("contenedorOtroMonto").style.display = "block";
+                inputOtroMonto.focus();
+                montoColaboracion = "";
+                otroMontoValidado = false;
+                confirmacionOtroMonto.style.display = "none";
+            } else {
+                document.getElementById("contenedorOtroMonto").style.display = "none";
+                inputOtroMonto.value = "";
+                montoColaboracion = boton.dataset.monto;
+                otroMontoValidado = true;
+                confirmacionOtroMonto.style.display = "none";
+            }
+        };
+    });
+
+    inputOtroMonto.addEventListener("input", function() {
+        otroMontoValidado = false;
+        montoColaboracion = "";
+
+        const valor = this.value.trim();
+
+        if (valor !== "" && Number(valor) > 0) {
+            confirmacionOtroMonto.innerText = "☑️";
+            confirmacionOtroMonto.style.display = "inline";
+        } else {
+            confirmacionOtroMonto.style.display = "none";
+        }
+    });
+
+    confirmacionOtroMonto.onclick = function() {
+        const valor = inputOtroMonto.value.trim();
+
+        if (valor === "" || Number(valor) <= 0) {
+            alert("💙 Ingresá un monto válido.");
+            otroMontoValidado = false;
+            montoColaboracion = "";
+            confirmacionOtroMonto.style.display = "none";
+            return;
+        }
+
+        montoColaboracion = valor;
+        otroMontoValidado = true;
+        confirmacionOtroMonto.innerText = "✅";
+    };
+
+    document.getElementById("btnContinuarColaboracion").onclick = function() {
+        const opcionOtro =
+            document.querySelector('.opcionColaboracion[data-monto="otro"]');
+
+        if (opcionOtro.classList.contains("seleccionada") && !otroMontoValidado) {
+            alert("☝️ Primero confirmá el monto con el ✅.");
+            return;
+        }
+
+        if (montoColaboracion === "") {
+            const otroMonto = inputOtroMonto.value.trim();
+
+            if (otroMonto === "" || Number(otroMonto) <= 0) {
+                alert("💙 Ingresá un monto válido para continuar.");
+                return;
+            }
+
+            montoColaboracion = otroMonto;
+        }
+
+        tipoEnvioCorreo = "colaboracion";
+        document.getElementById("popupColaboracion").style.display = "none";
+        document.querySelector("#popupSoporte h2").innerText =
+            "☕ Enviar colaboración";
+        document.getElementById("textoCorreo").innerText =
+            "¿Cómo desea enviar la información de la colaboración?";
+        document.getElementById("popupSoporte").style.display = "block";
+    };
+
+    // PREPARACIÓN DEL CORREO: se mantienen los tres métodos originales.
+    function obtenerAsuntoYCuerpoCorreo() {
+        let asunto = "";
+        let cuerpo = "";
+
+        if (tipoEnvioCorreo === "opinion") {
+            const comentario =
+                document.getElementById("comentarioOpinion").value.trim();
+
+            asunto = "⭐ Opinión de usuario";
+            cuerpo =
+`Usuario: ${usuario}
+
+Fecha: ${new Date().toLocaleDateString()}
+
+Valoración: ${valoracionOpinion}
+
+Comentario:
+${comentario || "Sin comentario"}
+
+----------------------------------------`;
+
+        } else if (tipoEnvioCorreo === "colaboracion") {
+            asunto = "☕ Colaboración para renovación - Agenda Docente";
+            cuerpo =
+`Usuario: ${usuario}
+
+Fecha: ${new Date().toLocaleDateString()}
+
+Realicé una colaboración para contribuir con la continuidad de Agenda Docente.
+
+Colaboración: $${montoColaboracion}
+
+----------------------------------------
+
+Una vez realizada la transferencia, envío esta información para que puedan identificarla y verificarla.
+`;
+
+        } else {
+            asunto = asuntoSoporte;
+            cuerpo =
+`Usuario: ${usuario}
+
+Fecha: ${new Date().toLocaleDateString()}
+
+----------------------------------------
+
+Escriba aquí su consulta.
+`;
+        }
+
+        return { asunto: asunto, cuerpo: cuerpo };
+    }
+
+    document.getElementById("btnGmail").onclick = function() {
+        const correo = obtenerAsuntoYCuerpoCorreo();
+
+        window.open(
+            "https://mail.google.com/mail/?view=cm&fs=1" +
+            "&to=" + encodeURIComponent(correoSoporte) +
+            "&su=" + encodeURIComponent(correo.asunto) +
+            "&body=" + encodeURIComponent(correo.cuerpo),
+            "_blank"
+        );
+    };
+
+    document.getElementById("btnOutlook").onclick = function() {
+        const correo = obtenerAsuntoYCuerpoCorreo();
+
+        window.open(
+            "https://outlook.live.com/mail/0/deeplink/compose" +
+            "?to=" + encodeURIComponent(correoSoporte) +
+            "&subject=" + encodeURIComponent(correo.asunto) +
+            "&body=" + encodeURIComponent(correo.cuerpo),
+            "_blank"
+        );
+    };
+
+    document.getElementById("btnMailto").onclick = function() {
+        const correo = obtenerAsuntoYCuerpoCorreo();
+
+        window.location.href =
+            "mailto:" + encodeURIComponent(correoSoporte) +
+            "?subject=" + encodeURIComponent(correo.asunto) +
+            "&body=" + encodeURIComponent(correo.cuerpo);
+    };
+
+    // COPIAR DATOS DE LA COLABORACIÓN
+    function copiarDatoColaboracion(dato) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(dato).then(function() {
+                alert("✅ Dato copiado.");
+            }).catch(function() {
+                copiarDatoAlternativo(dato);
+            });
+        } else {
+            copiarDatoAlternativo(dato);
+        }
+    }
+
+    function copiarDatoAlternativo(dato) {
+        const auxiliar = document.createElement("textarea");
+        auxiliar.value = dato;
+        auxiliar.style.position = "fixed";
+        auxiliar.style.opacity = "0";
+        document.body.appendChild(auxiliar);
+        auxiliar.select();
+
+        try {
+            document.execCommand("copy");
+            alert("✅ Dato copiado.");
+        } catch (error) {
+            alert("No se pudo copiar automáticamente. Seleccioná el dato y copialo.");
+        }
+
+        auxiliar.remove();
+    }
+
     actualizarSaludo();
    actualizarDatosPerfil();
 
@@ -1277,67 +1720,6 @@ setTimeout(function() {
 
 });
 
-// ===== COLABORACIÓN =====
-
-function abrirPopupColaboracion() {
-    document.getElementById("popupColaboracion").style.display = "block";
-}
-
-// Conectar los tres botones de colaboración
-
-[
-    "btnColaboracion",
-    "btnColaborarAvisoPreventivo",
-    "btnColaborarVencimiento"
-].forEach(function(id) {
-
-    const boton = document.getElementById(id);
-
-    if (boton) {
-        boton.addEventListener("click", function(event) {
-            event.preventDefault();
-            abrirPopupColaboracion();
-        });
-    }
-
-});
-
-document.getElementById("btnCancelarColaboracion").onclick = function() {
-    document.getElementById("popupColaboracion").style.display = "none";
-};
-
-let montoColaboracion = "";
-
-document.querySelectorAll(".opcionColaboracion").forEach(function(boton) {
-
-    boton.onclick = function() {
-
-        document.querySelectorAll(".opcionColaboracion").forEach(function(item) {
-            item.classList.remove("seleccionada");
-        });
-
-        boton.classList.add("seleccionada");
-
-        if (boton.dataset.monto === "otro") {
-
-            document.getElementById("contenedorOtroMonto").style.display = "block";
-            document.getElementById("otroMontoColaboracion").focus();
-            montoColaboracion = "";
-
-        } else {
-
-            document.getElementById("contenedorOtroMonto").style.display = "none";
-            document.getElementById("otroMontoColaboracion").value = "";
-            montoColaboracion = boton.dataset.monto;
-
-        }
-    };
-});
-
-function copiarDatoColaboracion(dato) {
-    navigator.clipboard.writeText(dato);
-}
-
   </script>
 </body>
-</html>
+</html>     
