@@ -1,17 +1,27 @@
 {
-  "name": "Agenda Docente",
-  "short_name": "Agenda",
-  "start_url": "/pgaglian.github.io/AD01/",
-  "scope": "/pgaglian.github.io/AD01/",
-  "display": "standalone",
-  "background_color": "#e8f4f8",
-  "theme_color": "#243b53",
-  "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/pgaglian/Agendadocente-Datos/main/Logo/AD.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any"
+"name": "Agenda Docente",
+"short_name": "Agenda Docente",
+"start_url": "/pgaglian.github.io/AD01/",
+"scope": "pgaglian.github.io/AD01/",
+
+"share_target": {
+    "action": "/pgaglian.github.io/AD01/",
+    "method": "GET",
+    "params": {
+        "title": "title",
+        "text": "text",
+        "url": "url"
     }
-  ]
+},
+
+"display": "standalone",
+"background_color": "#111111",
+"theme_color": "#111111",
+"icons": [
+{
+"src": "https://raw.githubusercontent.com/pgaglian/Agendadocente-Datos/main/Logo/AD.png",
+"sizes": "1024x1024",
+"type": "image/png"
+}
+]
 }
