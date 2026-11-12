@@ -1,7 +1,7 @@
 
 {
   "name": "Agenda Docente",
-  "short_name": "AG",
+  "short_name": "Agenda Docente",
   "start_url": "/AD01/",
   "scope": "/AD01/",
   "display": "standalone",
