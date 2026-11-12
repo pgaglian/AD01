@@ -28,7 +28,7 @@
 header {
     background: linear-gradient(135deg, #243b53, #426783);
     color: white;
-    padding: 12px 18px;
+    padding: 8px 14px;
     border-radius: 12px;
     box-shadow: var(--sombra);
     text-align: center;
@@ -36,16 +36,23 @@ header {
 
 #reloj {
     text-align: left;
-    margin-bottom: 8px;
-    font-size: .85rem;
+    margin-bottom: 4px;
+    font-size: .75rem;
 }
 
    header h1 {
-    margin: 0 0 7px;
-    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    margin: 0 0 4px;
+    font-size: clamp(1.15rem, 3vw, 1.4rem);  
 }
     header p { 
-    margin: 0; opacity: .9; }
+    margin: 0;
+    opacity: .9;
+}
+
+    header h2 {
+    margin: 6px 0 0;
+    font-size: 1rem;
+}
 
 /* ===== LOGO EN CABECERA ===== */
 
@@ -53,13 +60,13 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 8px;
+    gap: 7px;
+    margin-top: 4px;
 }
 
 .firma-con-logo img {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
 }
 
@@ -72,8 +79,8 @@ header {
 .perfil {
     margin-top: 10px;
     padding: 14px 20px;
-    background: linear-gradient(180deg, #1d1d1d, #111) !important;
-    border: 1px solid #3d3d3d;
+    background: var(--panel);
+    border: 1px solid var(--borde);
     border-radius: 20px;
     box-shadow: 0 8px 25px rgba(0,0,0,.45);
 }
@@ -94,7 +101,7 @@ header {
     background: transparent !important;
     border: none;
     box-shadow: none;
-    color: #FFD700 !important;
+    color: var(--texto) !important;
     font-size: 13px;
     font-weight: bold;
 }
@@ -114,14 +121,14 @@ header {
     padding: 2px 0;
     background: transparent !important;
     border: none !important;
-    color: #EEE !important;
+    color: var(--texto) !important;
     font-size: 13px;
 }
 
 .perfil .dato strong {
     display: inline-block;
     flex: 0 0 140px;
-    color: #FFD700 !important;
+    color: var(--texto) !important;
     font-size: 13px;
 }
 
@@ -139,7 +146,7 @@ header {
     background: transparent !important;
     border: none;
     box-shadow: none;
-    color: #FFD700 !important;
+    color: var(--texto) !important;
     font-size: 13px;
     font-weight: bold;
     text-decoration: none;
@@ -149,12 +156,12 @@ header {
 .perfil .dato a:hover,
 .perfil .dato button:hover,
 .perfil .perfil-cabecera button:hover {
-    color: white !important;
+    color: var(--texto) !important;
     text-decoration: underline;
 }
 
 .perfil #usuarioCliente {
-    color: #EEE !important;
+    color: var(--texto) !important;
     font-weight: bold;
 }
 
@@ -163,6 +170,31 @@ header {
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.perfil-accesos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.perfil-accesos button {
+    width: auto;
+    margin: 0;
+    padding: 4px 0;
+    background: transparent !important;
+    color: var(--texto) !important;
+    border: none;
+    box-shadow: none;
+    font-weight: bold;
+}
+
+.perfil-accesos button:hover {
+    background: transparent !important;
+    text-decoration: underline;
+    box-shadow: none;
 }
 
     .acciones { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
@@ -180,12 +212,24 @@ header {
     }
     .seccion h2 { margin: 0 0 8px; font-size: 1.25rem; }
     .seccion p { color: var(--suave); line-height: 1.5; }
+
     .novedades {
-      margin-top: 18px; padding: 18px; background: #fff;
-      border: 1px solid var(--borde); border-radius: 16px; box-shadow: var(--sombra);
+      margin-top: 18px;
+       padding: 18px; 
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      box-shadow: var(--sombra);
     }
+
     .novedades h2 { margin: 0 0 8px; }
-    .aviso { color: var(--suave); margin: 0; line-height: 1.5; }
+   .novedades .aviso {
+    color: var(--texto) !important;
+    margin: 0;
+    line-height: 1.5;
+    }
+
+    
     body.modo-oscuro {
       --fondo: #17212b;
       --panel: #243241;
@@ -292,103 +336,6 @@ body.eclipse {
 body.eclipse header {
     background: #111;
 }
-/* ===== PERFIL: MISMO ESTILO QUE MI ESPACIO ===== */
-
-.perfil {
-    margin-top: 10px;
-    padding: 14px 20px;
-    background: linear-gradient(180deg, #1d1d1d, #111) !important;
-    border: 1px solid #3d3d3d;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.45);
-}
-
-/* CABECERA Y BOTÓN DE APARIENCIA */
-
-.perfil-cabecera {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.perfil .perfil-cabecera button {
-    width: auto;
-    margin: 0;
-    padding: 3px 0;
-    background: transparent !important;
-    border: none;
-    box-shadow: none;
-    color: #FFD700 !important;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-/* DATOS DEL PERFIL */
-
-.perfil .datos {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.perfil .dato {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 2px 0;
-    background: transparent !important;
-    border: none !important;
-    color: #EEE !important;
-    font-size: 13px;
-}
-
-.perfil .dato strong {
-    display: inline-block;
-    flex: 0 0 140px;
-    color: #FFD700 !important;
-    font-size: 13px;
-}
-
-.perfil .dato > span,
-.perfil .dato > a,
-.perfil .dato > button {
-    font-size: 13px;
-}
-
-.perfil .dato a,
-.perfil .dato button {
-    width: auto;
-    margin: 0;
-    padding: 0;
-    background: transparent !important;
-    border: none;
-    box-shadow: none;
-    color: #FFD700 !important;
-    font-size: 13px;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.perfil .dato a:hover,
-.perfil .dato button:hover,
-.perfil .perfil-cabecera button:hover {
-    color: white !important;
-    text-decoration: underline;
-}
-
-.perfil #usuarioCliente {
-    color: #EEE !important;
-    font-weight: bold;
-}
-
-.perfil-redes {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
 
 /* DATOS Y TEXTOS */
 body.oceano .dato,
@@ -400,33 +347,11 @@ body.eclipse .dato {
     border-color: var(--borde);
     color: var(--texto);
 }
-
-body.oceano .perfil h2,
-body.oceano .seccion h2,
-body.oceano .novedades h2,
-body.bosque .perfil h2,
-body.bosque .seccion h2,
-body.bosque .novedades h2,
-body.crepusculo .perfil h2,
-body.crepusculo .seccion h2,
-body.crepusculo .novedades h2,
-body.biblioteca .perfil h2,
-body.biblioteca .seccion h2,
-body.biblioteca .novedades h2,
-body.eclipse .perfil h2,
-body.eclipse .seccion h2,
-body.eclipse .novedades h2 {
-    color: #ffffff;
+.perfil h2,
+.seccion h2,
+.novedades h2 {
+    color: var(--texto);
 }
-
-body.oceano .dato span,
-body.bosque .dato span,
-body.crepusculo .dato span,
-body.biblioteca .dato span,
-body.eclipse .dato span {
-    color: #ffffff;
-}
-
 
 /* ===== BOTONES SECUNDARIOS EN TEMAS ===== */
 
@@ -841,10 +766,7 @@ body.eclipse .acciones .secundario {
     resize: vertical;
 }
 
-.perfil #usuarioCliente {
-    font-weight: 700;
-    color: var(--texto);
-}
+
 
 /* ===== PANTALLAS DE CELEBRACIÓN ===== */
 
@@ -1006,6 +928,69 @@ body.eclipse .acciones .secundario {
     flex: none;
 }
 
+/* ===== VENTANA PERFIL Y SERVICIO ===== */
+
+#ventanaPerfil {
+    display: none;
+}
+
+.perfil-ventana-cabecera {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#perfilDatos {
+    display: flex;
+}
+
+/* ===== VENTANA PERFIL Y SERVICIO ===== */
+
+#ventanaPerfil {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(92%, 460px);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 16px 20px;
+    background: color-mix(in srgb, var(--panel), white 18%);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    z-index: 1000;
+}
+
+.perfil-ventana-cabecera {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+#btnCerrarPerfil {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--texto);
+    font-size: 18px;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#btnCerrarPerfil:hover {
+    background: var(--primario-claro);
+}
+
+#perfilDatos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 </style>
 
 </head>
@@ -1038,18 +1023,30 @@ body.eclipse .acciones .secundario {
 </header>
 
 <!-- PERFIL -->
-<section class="perfil" aria-label="Mi perfil">
 
+<section class="perfil" aria-label="Perfil y Servicio">
 
-    <div class="datos">
+    <div class="perfil-accesos">
+        <button id="btnPerfilServicio" type="button">
+            👤 Perfil y Servicio
+        </button>
+
+        <button class="secundario" id="btnApariencia" type="button">
+            🎨 Cambiar apariencia
+        </button>
+    </div>
+<div id="ventanaPerfil" class="perfil-ventana">
+
+    <div class="perfil-ventana-cabecera">
+        <button id="btnCerrarPerfil" type="button" aria-label="Cerrar">✖</button>
+    </div>
+
+    <div class="datos" id="perfilDatos">
 
 <div class="dato dato-usuario">
     <strong>📧 Usuario:</strong>
     <span id="usuarioCliente"></span>
-
-    <button class="secundario" id="btnApariencia" type="button">
-        🎨 Cambiar apariencia
-    </button>
+   
 </div>
 
         <div class="dato">
@@ -1093,6 +1090,8 @@ body.eclipse .acciones .secundario {
         </div>
 
     </div>
+
+</div>
 
 </section>
 
@@ -2126,7 +2125,17 @@ function volverPantallaPrincipal() {
 
     document.getElementById("pantallaPrincipal").style.display = "grid";
 }
+// ===== PERFIL Y SERVICIO =====
+
+document.getElementById("btnPerfilServicio").addEventListener("click", function() {
+    document.getElementById("ventanaPerfil").style.display = "block";
+});
+
+document.getElementById("btnCerrarPerfil").addEventListener("click", function() {
+    document.getElementById("ventanaPerfil").style.display = "none";
+});
 
   </script>
+
 </body>
 </html>     
