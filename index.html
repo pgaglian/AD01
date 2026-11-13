@@ -1546,45 +1546,101 @@ body.eclipse .acciones .secundario {
 
 </div>
 
+<div class="agenda-modulos">
+
+  <article class="agenda-tarjeta">
+    <div class="agenda-tarjeta-icono">🗓️</div>
+    <h3>Planilla de asistencia</h3>
+    <p>Registro y seguimiento de asistencia por curso y materia.</p>
+  </article>
+
+  <article class="agenda-tarjeta">
+    <div class="agenda-tarjeta-icono">📚</div>
+    <h3>Planilla de actividades</h3>
+    <p>Registro de actividades, temas, notas y valoraciones.</p>
+  </article>
+
+  <article class="agenda-tarjeta">
+    <div class="agenda-tarjeta-icono">📊</div>
+    <h3>Consultas e informes</h3>
+    <p>Consultas, estadísticas y reportes por período.</p>
+  </article>
+
+  <article class="agenda-tarjeta"
+    onclick="mostrarCargarDatos()"
+    style="cursor:pointer;">
+
+    <div class="agenda-tarjeta-icono">📋</div>
+    <h3>Cargar datos</h3>
+    <p>Administración de colegios, cursos, materias y estudiantes.</p>
+
+  </article>
+
+  <article class="agenda-tarjeta"
+    onclick="mostrarGestionDatos()"
+    style="cursor:pointer;">
+
+    <div class="agenda-tarjeta-icono">📂</div>
+    <h3>Gestión de datos</h3>
+    <p>Importar, exportar, transferir y recuperar datos.</p>
+
+  </article>
+
+</div>
+ 
+</section>
+
+<!-- PANTALLA CARGAR DATOS -->
+
+<section id="cargarDatos" class="agenda-contenedor" style="display:none;">
+
+  <div class="cabecera-agenda">
+
+    <button class="btn-volver-agenda" type="button"
+      onclick="volverDesdeCargarDatos()">
+      ⬅️ Volver
+    </button>
+
+    <h2>📋 Cargar datos</h2>
+
+    <div class="espacio-cabecera"></div>
+
+  </div>
+
   <div class="agenda-modulos">
 
     <article class="agenda-tarjeta">
-      <div class="agenda-tarjeta-icono">🗓️</div>
-      <h3>Planilla de asistencia</h3>
-      <p>Registro y seguimiento de asistencia por curso y materia.</p>
+      <div class="agenda-tarjeta-icono">📅</div>
+      <h3>Ciclo lectivo</h3>
+      <p>Configurar año escolar y cuatrimestres.</p>
+    </article>
+
+    <article class="agenda-tarjeta">
+      <div class="agenda-tarjeta-icono">🏫</div>
+      <h3>Colegios</h3>
+      <p>Administrar establecimientos educativos.</p>
+    </article>
+
+    <article class="agenda-tarjeta">
+      <div class="agenda-tarjeta-icono">👥</div>
+      <h3>Cursos</h3>
+      <p>Administrar cursos y divisiones.</p>
     </article>
 
     <article class="agenda-tarjeta">
       <div class="agenda-tarjeta-icono">📚</div>
-      <h3>Planilla de actividades</h3>
-      <p>Registro de actividades, temas, notas y valoraciones.</p>
+      <h3>Materias</h3>
+      <p>Administrar materias y asignaturas.</p>
     </article>
 
     <article class="agenda-tarjeta">
-      <div class="agenda-tarjeta-icono">📊</div>
-      <h3>Consultas e informes</h3>
-      <p>Consultas, estadísticas y reportes por período.</p>
+      <div class="agenda-tarjeta-icono">🎓</div>
+      <h3>Estudiantes</h3>
+      <p>Registrar y administrar estudiantes.</p>
     </article>
-
-    <article class="agenda-tarjeta">
-      <div class="agenda-tarjeta-icono">📋</div>
-      <h3>Cargar datos</h3>
-      <p>Administración de colegios, cursos, materias y estudiantes.</p>
-    </article>
-
-   <article class="agenda-tarjeta"
-  onclick="mostrarGestionDatos()"
-  style="cursor:pointer;">
-
-  <div class="agenda-tarjeta-icono">📂</div>
-  <h3>Gestión de datos</h3>
-  <p>Importar, exportar, transferir y recuperar datos.</p>
-
-</article>
 
   </div>
 
- 
 </section>
 
 
@@ -2241,9 +2297,23 @@ function mostrarGestionDatos() {
     document.getElementById("gestionDatos").style.display = "block";
 }
 
+
+
 function volverDesdeGestionDatos() {
 
     document.getElementById("gestionDatos").style.display = "none";
+    document.getElementById("menuAgenda").style.display = "block";
+}
+
+function mostrarCargarDatos() {
+
+    document.getElementById("menuAgenda").style.display = "none";
+    document.getElementById("cargarDatos").style.display = "block";
+}
+
+function volverDesdeCargarDatos() {
+
+    document.getElementById("cargarDatos").style.display = "none";
     document.getElementById("menuAgenda").style.display = "block";
 }
 
