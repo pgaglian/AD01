@@ -991,6 +991,41 @@ body.eclipse .acciones .secundario {
     gap: 8px;
 }
 
+/* ===== GESTIÓN DE DATOS ===== */
+
+.menu-gestion-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.opcion-gestion {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    color: var(--texto);
+}
+
+.opcion-gestion span:first-child {
+    font-size: 23px;
+}
+
+.opcion-gestion p {
+    flex: 1;
+    margin: 0;
+}
+
+.opcion-gestion span:last-child {
+    font-size: 24px;
+    color: var(--texto);
+}
+
 </style>
 
 </head>
@@ -1522,10 +1557,80 @@ body.eclipse .acciones .secundario {
       <p>Administración de colegios, cursos, materias y estudiantes.</p>
     </article>
 
+   <article class="agenda-tarjeta"
+  onclick="mostrarGestionDatos()"
+  style="cursor:pointer;">
+
+  <div class="agenda-tarjeta-icono">📂</div>
+  <h3>Gestión de datos</h3>
+  <p>Importar, exportar, transferir y recuperar datos.</p>
+
+</article>
+
   </div>
 
  
 </section>
+
+
+<!-- PANTALLA GESTIÓN DE DATOS -->
+ 
+<section id="gestionDatos" class="agenda-contenedor" style="display:none;">
+
+  <div class="cabecera-agenda">
+
+    <button class="btn-volver-agenda" type="button"
+        onclick="volverDesdeGestionDatos()">
+        ⬅️ Volver
+    </button>
+
+    <h2>📂 Gestión de datos</h2>
+
+    <div class="espacio-cabecera"></div>
+
+  </div>
+
+  <div class="menu-gestion-datos">
+
+    <div class="opcion-gestion">
+      <span>📥</span>
+      <p>Importar información</p>
+      <span>›</span>
+    </div>
+
+    <div class="opcion-gestion">
+      <span>📤</span>
+      <p>Exportar información</p>
+      <span>›</span>
+    </div>
+
+    <div class="opcion-gestion">
+      <span>🔄</span>
+      <p>Transferir entre PC y celular</p>
+      <span>›</span>
+    </div>
+
+    <div class="opcion-gestion">
+      <span>♻️</span>
+      <p>Recuperar copias de seguridad</p>
+      <span>›</span>
+    </div>
+
+    <div class="opcion-gestion">
+      <span>🖨️</span>
+      <p>Imprimir planillas e informes</p>
+      <span>›</span>
+    </div>
+
+    <div class="opcion-gestion">
+      <span>📁</span>
+      <p>Gestionar documentación guardada</p>
+      <span>›</span>
+    </div>
+
+  </div>
+</section>
+
 
 
     <!-- NOVEDADES reemplaza el antiguo bloque de patrocinadores.
@@ -2115,9 +2220,22 @@ function mostrarMenuAgenda() {
     document.getElementById("menuAgenda").style.display = "block";
 }
 
+function mostrarGestionDatos() {
+
+    document.getElementById("menuAgenda").style.display = "none";
+    document.getElementById("gestionDatos").style.display = "block";
+}
+
+function volverDesdeGestionDatos() {
+
+    document.getElementById("gestionDatos").style.display = "none";
+    document.getElementById("menuAgenda").style.display = "block";
+}
+
 function volverPantallaPrincipal() {
 
     document.getElementById("menuAgenda").style.display = "none";
+    document.getElementById("gestionDatos").style.display = "none";
 
     document.querySelector("header").style.display = "";
     document.querySelector(".perfil").style.display = "";
@@ -2125,6 +2243,7 @@ function volverPantallaPrincipal() {
 
     document.getElementById("pantallaPrincipal").style.display = "grid";
 }
+
 // ===== PERFIL Y SERVICIO =====
 
 document.getElementById("btnPerfilServicio").addEventListener("click", function() {
