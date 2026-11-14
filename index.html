@@ -2187,6 +2187,22 @@ function volverPantallaPrincipal() {
     document.getElementById("pantallaPrincipal").style.display = "grid";
 }
 
+// CONTROL DEL BOTÓN ATRÁS DEL CELULAR
+
+history.pushState({ pantalla: "agenda" }, "", "#agenda");
+
+window.addEventListener("popstate", function() {
+
+    const menuAgenda = document.getElementById("menuAgenda");
+
+    if (menuAgenda.style.display !== "none") {
+
+        volverPantallaPrincipal();
+
+    }
+
+});
+
 // ===== PERFIL Y SERVICIO =====
 
 document.getElementById("btnPerfilServicio").addEventListener("click", function() {
