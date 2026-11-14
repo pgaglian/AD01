@@ -565,6 +565,287 @@ body.eclipse .acciones .secundario {
     font-size: 14px;
     line-height: 1.5;
 }
+
+/* CONFIGURACIÓN COMPARTIDA */
+
+#configuracionAgenda {
+    max-width: 750px;
+    margin: 35px auto;
+    padding: 30px;
+    background: var(--color-tarjeta, #ffffff);
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+
+#configuracionAgenda h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#configuracionAgenda p {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#configuracionAgenda label {
+    display: block;
+    margin: 18px 0 7px;
+    font-weight: bold;
+}
+
+#configuracionAgenda input,
+#configuracionAgenda select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+/* CELULARES */
+@media (max-width: 700px) {
+    #configuracionAgenda {
+        margin: 20px auto;
+        padding: 20px 16px;
+        width: 100%;
+    }
+}
+
+/* HORARIOS CONFIGURADOS */
+
+.bloque-horario {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px solid #dce2ea;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.bloque-horario h4 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.fila-horario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px;
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.acciones-horario {
+    display: flex;
+    gap: 8px;
+}
+
+.acciones-horario button {
+    padding: 7px 10px;
+    border: 1px solid #dce2ea;
+    border-radius: 7px;
+    background: white;
+    cursor: pointer;
+}
+
+@media (max-width: 390px) {
+    .fila-horario {
+        flex-wrap: wrap;
+    }
+}
+
+/* ALUMNOS DEL CURSO */
+
+#contenedorAlumnos {
+    margin-top: 25px;
+}
+
+#contenedorAlumnos > div:first-of-type {
+    padding: 16px;
+    border: 1px solid #dce2ea;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+#contenedorAlumnos h3 {
+    margin-bottom: 12px;
+}
+
+#listaAlumnos {
+    margin-top: 18px;
+}
+
+.fila-alumno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.fila-alumno button {
+    padding: 7px 10px;
+    border: 1px solid #dce2ea;
+    border-radius: 7px;
+    background: white;
+    cursor: pointer;
+}
+
+@media (max-width: 390px) {
+    .fila-alumno {
+        flex-wrap: wrap;
+    }
+}
+
+
+
+/* VENTANAS DE EDICIÓN */
+
+#ventanaHorarios,
+#ventanaEditarAlumno {
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    padding: 24px;
+    box-sizing: border-box;
+    background: var(--color-tarjeta, #ffffff);
+    border: 1px solid #dce2ea;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+#ventanaHorarios h3,
+#ventanaEditarAlumno h3 {
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+#ventanaHorarios label,
+#ventanaEditarAlumno label {
+    display: block;
+    margin: 14px 0 7px;
+    font-weight: bold;
+}
+
+#ventanaHorarios input,
+#ventanaEditarAlumno input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #dce2ea;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+#ventanaHorarios button,
+#ventanaEditarAlumno button {
+    min-height: 42px;
+    padding: 10px 16px;
+    margin: 6px 4px 0 0;
+    border: 1px solid #dce2ea;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* VENTANA DE CONFIRMACIÓN SUPERPUESTA */
+
+#ventanaConfirmacion {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.50);
+}
+
+#ventanaConfirmacion > h3,
+#ventanaConfirmacion > p,
+#ventanaConfirmacion > button {
+    position: relative;
+}
+
+#ventanaConfirmacion h3 {
+    margin: 0 0 14px;
+}
+
+#ventanaConfirmacion p {
+    margin-bottom: 20px;
+}
+
+#ventanaConfirmacion button {
+    min-height: 42px;
+    padding: 10px 16px;
+    margin: 5px;
+    border: 1px solid #dce2ea;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* TARJETA INTERIOR DE CONFIRMACIÓN */
+
+#ventanaConfirmacion .contenido-confirmacion {
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    box-sizing: border-box;
+    background: var(--color-tarjeta, #ffffff);
+    border: 1px solid #dce2ea;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+    text-align: center;
+}
+
+/* ADAPTACIÓN DE TODA LA CONFIGURACIÓN */
+
+@media (max-width: 700px) {
+
+    #configuracionAgenda {
+        width: 100%;
+        max-width: 100%;
+        margin: 12px auto;
+        padding: 16px 12px;
+    }
+
+    #ventanaHorarios,
+    #ventanaEditarAlumno {
+        width: 100%;
+        max-width: 100%;
+        margin: 16px auto;
+        padding: 18px 14px;
+    }
+
+    #ventanaHorarios button,
+    #ventanaEditarAlumno button {
+        margin: 6px 0;
+    }
+
+    .fila-alumno,
+    .fila-horario {
+        min-width: 0;
+        flex-wrap: wrap;
+        overflow-wrap: anywhere;
+    }
+
+    .acciones-horario {
+        flex-shrink: 0;
+    }
+}
+
 /* TABLET Y CELULAR */
 
 @media (max-width: 700px) {
@@ -1574,19 +1855,179 @@ body.eclipse .acciones .secundario {
 </div>
 <div class="agenda-modulos">
 
-  <article class="agenda-tarjeta">
+  <article class="agenda-tarjeta" onclick="abrirConfiguracionAgenda('asistencia')">
     <div class="agenda-tarjeta-icono">🗓️</div>
     <h3>Planilla de asistencia</h3>
     <p>Registro y seguimiento de asistencia por curso y materia.</p>
   </article>
 
-  <article class="agenda-tarjeta">
+  <article class="agenda-tarjeta" onclick="abrirConfiguracionAgenda('actividades')">
     <div class="agenda-tarjeta-icono">📚</div>
     <h3>Planilla de actividades</h3>
     <p>Registro de actividades, temas, notas y valoraciones.</p>
   </article>
 
 </div>
+
+<!-- CONFIGURACIÓN COMPARTIDA DE AGENDA -->
+ 
+<section id="configuracionAgenda" style="display:none;">
+
+    <h2>⚙️ Configuración inicial</h2>
+
+    <p>Configurá los datos del ciclo lectivo para utilizar las planillas.</p>
+
+    <label>Año escolar</label>
+    <input type="number" id="anioEscolar" placeholder="Ejemplo: 2026">
+
+    <label>Cuatrimestre</label>
+    <select id="cuatrimestre">
+        <option value="">Seleccionar</option>
+        <option value="1">Primer cuatrimestre</option>
+        <option value="2">Segundo cuatrimestre</option>
+    </select>
+
+    <label>Curso</label>
+    <input type="text" id="curso" placeholder="Ejemplo: 2° A">
+
+    <label>Materia</label>
+    <input type="text" id="materia" placeholder="Nombre de la materia">
+
+    <label>Fecha de inicio</label>
+    <input type="date" id="fechaInicio">
+
+    <label>Fecha de finalización</label>
+    <input type="date" id="fechaFin">
+
+    <label>Inicio del receso</label>
+    <input type="date" id="inicioReceso">
+
+    <label>Finalización del receso</label>
+    <input type="date" id="finReceso">
+<hr>
+
+<h3>📅 Días y horarios de cursada</h3>
+
+<p>Seleccioná los días en los que se dicta esta materia.</p>
+
+<div id="diasClase">
+
+    <button type="button" onclick="configurarHorario('lunes')">
+        Lunes
+    </button>
+
+    <button type="button" onclick="configurarHorario('martes')">
+        Martes
+    </button>
+
+    <button type="button" onclick="configurarHorario('miercoles')">
+        Miércoles
+    </button>
+
+    <button type="button" onclick="configurarHorario('jueves')">
+        Jueves
+    </button>
+
+    <button type="button" onclick="configurarHorario('viernes')">
+        Viernes
+    </button>
+
+   
+</div>
+
+<div id="horariosConfigurados"></div>
+
+<!-- VENTANA DE HORARIOS -->
+
+<div id="ventanaHorarios" style="display:none;">
+
+    <h3 id="tituloDiaHorario">Horario del día</h3>
+
+    <label>Hora de inicio</label>
+    <input type="time" id="nuevaHoraInicio">
+
+    <label>Hora de finalización</label>
+    <input type="time" id="nuevaHoraFin">
+
+    <button type="button" onclick="guardarHorarioDia()">
+        Guardar horario
+    </button>
+
+    <button type="button" onclick="cerrarVentanaHorarios()">
+        Cancelar
+    </button>
+
+</div>
+
+<!-- VENTANA DE CONFIRMACIÓN -->
+
+<div id="ventanaConfirmacion" style="display:none;">
+
+    <div class="contenido-confirmacion">
+
+        <h3 id="tituloConfirmacion">Confirmar acción</h3>
+
+        <p id="mensajeConfirmacion">¿Querés continuar?</p>
+
+        <button type="button" id="btnConfirmarAccion">
+            Confirmar
+        </button>
+
+        <button type="button" onclick="cerrarConfirmacion()">
+            Cancelar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ALUMNOS DEL CURSO -->
+<div id="contenedorAlumnos">
+
+    <h3>👥 Alumnos del curso</h3>
+
+    <p>Administrá los alumnos que pertenecen a este curso.</p>
+
+    <div>
+        <label for="nombreAlumno">Nombre</label>
+        <input type="text" id="nombreAlumno" placeholder="Nombre del alumno">
+
+        <label for="apellidoAlumno">Apellido</label>
+        <input type="text" id="apellidoAlumno" placeholder="Apellido del alumno">
+
+        <button type="button" onclick="agregarAlumno()">
+            ➕ Agregar alumno
+        </button>
+    </div>
+
+    <div id="listaAlumnos"></div>
+
+</div>
+
+<!-- VENTANA DE EDICIÓN DE ALUMNOS -->
+
+<div id="ventanaEditarAlumno" style="display:none;">
+
+    <h3>✏️ Editar alumno</h3>
+
+    <label for="editarNombreAlumno">Nombre</label>
+    <input type="text" id="editarNombreAlumno">
+
+    <label for="editarApellidoAlumno">Apellido</label>
+    <input type="text" id="editarApellidoAlumno">
+
+    <button type="button" onclick="guardarEdicionAlumno()">
+        Guardar cambios
+    </button>
+
+    <button type="button" onclick="cerrarEdicionAlumno()">
+        Cancelar
+    </button>
+
+</div>
+
+</section>
+
 
 </section>
 
@@ -2185,6 +2626,343 @@ function volverPantallaPrincipal() {
     document.querySelector(".novedades").style.display = "";
 
     document.getElementById("pantallaPrincipal").style.display = "grid";
+}
+
+let planillaSeleccionada = "";
+
+// BASES DE ALUMNOS POR AÑO Y CURSO
+
+let basesAlumnos = {};
+
+let alumnosCursoActual = [];
+
+
+// HORARIOS DE CURSADA
+
+let diaHorarioSeleccionado = "";
+let indiceHorarioEditando = null;
+let horariosCursada = {};
+
+function configurarHorario(dia) {
+
+    diaHorarioSeleccionado = dia;
+    indiceHorarioEditando = null;
+
+    const nombresDias = {
+        lunes: "Lunes",
+        martes: "Martes",
+        miercoles: "Miércoles",
+        jueves: "Jueves",
+        viernes: "Viernes"
+    };
+
+    document.getElementById("tituloDiaHorario").textContent =
+        "Horario del " + nombresDias[dia];
+
+    document.getElementById("nuevaHoraInicio").value = "";
+    document.getElementById("nuevaHoraFin").value = "";
+
+    document.getElementById("ventanaHorarios").style.display = "block";
+}
+
+function guardarHorarioDia() {
+
+    const inicio = document.getElementById("nuevaHoraInicio").value;
+    const fin = document.getElementById("nuevaHoraFin").value;
+
+    if (!inicio || !fin || inicio >= fin) {
+        alert("Ingresá un horario válido.");
+        return;
+    }
+
+    if (!horariosCursada[diaHorarioSeleccionado]) {
+        horariosCursada[diaHorarioSeleccionado] = [];
+    }
+
+  if (indiceHorarioEditando !== null) {
+
+    horariosCursada[diaHorarioSeleccionado][indiceHorarioEditando] = {
+        inicio: inicio,
+        fin: fin
+    };
+
+} else {
+
+    horariosCursada[diaHorarioSeleccionado].push({
+        inicio: inicio,
+        fin: fin
+    });
+
+}
+
+    mostrarHorariosConfigurados();
+    cerrarVentanaHorarios();
+}
+
+function cerrarVentanaHorarios() {
+
+    document.getElementById("ventanaHorarios").style.display = "none";
+
+    indiceHorarioEditando = null;
+
+    mostrarHorariosConfigurados();
+}
+
+function editarHorario(dia, indice) {
+
+    diaHorarioSeleccionado = dia;
+    indiceHorarioEditando = indice;
+
+    const horario = horariosCursada[dia][indice];
+
+    document.getElementById("tituloDiaHorario").textContent =
+        "Editar horario";
+
+    document.getElementById("nuevaHoraInicio").value = horario.inicio;
+    document.getElementById("nuevaHoraFin").value = horario.fin;
+
+    document.getElementById("ventanaHorarios").style.display = "block";
+
+    mostrarHorariosConfigurados();
+}
+
+function eliminarHorario(dia, indice) {
+
+    const horario = horariosCursada[dia][indice];
+
+    mostrarConfirmacion(
+        "Eliminar horario",
+        "¿Querés eliminar el horario de " +
+        horario.inicio + " a " + horario.fin + "?",
+        function () {
+
+            horariosCursada[dia].splice(indice, 1);
+
+            if (horariosCursada[dia].length === 0) {
+                delete horariosCursada[dia];
+            }
+
+            mostrarHorariosConfigurados();
+        }
+    );
+}
+
+function mostrarHorariosConfigurados() {
+
+    const contenedor = document.getElementById("horariosConfigurados");
+    contenedor.innerHTML = "";
+
+    const nombresDias = {
+        lunes: "Lunes",
+        martes: "Martes",
+        miercoles: "Miércoles",
+        jueves: "Jueves",
+        viernes: "Viernes"
+    };
+
+    for (const dia in horariosCursada) {
+
+        const bloque = document.createElement("div");
+        bloque.className = "bloque-horario";
+
+        const titulo = document.createElement("h4");
+        titulo.textContent = "📅 " + nombresDias[dia];
+        bloque.appendChild(titulo);
+
+        horariosCursada[dia].forEach((horario, indice) => {
+
+            const fila = document.createElement("div");
+            fila.className = "fila-horario";
+
+            const horas = document.createElement("span");
+            horas.textContent = "🕒 " + horario.inicio + " a " + horario.fin;
+
+            const acciones = document.createElement("div");
+            acciones.className = "acciones-horario";
+
+            const editar = document.createElement("button");
+            editar.type = "button";
+            editar.textContent = "✏️";
+            editar.title = "Editar horario";
+            editar.onclick = () => editarHorario(dia, indice);
+
+          const eliminar = document.createElement("button");
+          eliminar.type = "button";
+          eliminar.textContent = "🗑️";
+          eliminar.title = "Eliminar horario";
+          eliminar.disabled = indiceHorarioEditando !== null;
+          eliminar.onclick = () => eliminarHorario(dia, indice);
+
+            acciones.appendChild(editar);
+            acciones.appendChild(eliminar);
+
+            fila.appendChild(horas);
+            fila.appendChild(acciones);
+
+            bloque.appendChild(fila);
+        });
+
+        contenedor.appendChild(bloque);
+    }
+}
+
+// CARGA DE ALUMNOS
+
+function agregarAlumno() {
+
+    const nombre = document.getElementById("nombreAlumno").value.trim();
+    const apellido = document.getElementById("apellidoAlumno").value.trim();
+
+    if (!nombre || !apellido) {
+        alert("Completá el nombre y apellido del alumno.");
+        return;
+    }
+
+    alumnosCursoActual.push({
+        nombre: nombre,
+        apellido: apellido
+    });
+
+    document.getElementById("nombreAlumno").value = "";
+    document.getElementById("apellidoAlumno").value = "";
+
+    mostrarAlumnos();
+}
+function mostrarAlumnos() {
+
+    const lista = document.getElementById("listaAlumnos");
+
+    lista.innerHTML = "";
+
+    alumnosCursoActual.forEach((alumno, indice) => {
+
+        const fila = document.createElement("div");
+        fila.className = "fila-alumno";
+
+        const nombre = document.createElement("span");
+        nombre.textContent = (indice + 1) + ". " +
+            alumno.apellido + ", " + alumno.nombre;
+
+        const acciones = document.createElement("div");
+        acciones.className = "acciones-horario";
+
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.textContent = "✏️";
+        editar.title = "Editar alumno";
+        editar.onclick = () => editarAlumno(indice);
+
+        const eliminar = document.createElement("button");
+        eliminar.type = "button";
+        eliminar.textContent = "🗑️";
+        eliminar.title = "Eliminar alumno";
+        eliminar.onclick = () => eliminarAlumno(indice);
+
+        acciones.appendChild(editar);
+        acciones.appendChild(eliminar);
+
+        fila.appendChild(nombre);
+        fila.appendChild(acciones);
+
+        lista.appendChild(fila);
+    });
+}
+
+let indiceAlumnoEditando = null;
+
+function editarAlumno(indice) {
+
+    indiceAlumnoEditando = indice;
+
+    const alumno = alumnosCursoActual[indice];
+
+    document.getElementById("editarNombreAlumno").value = alumno.nombre;
+    document.getElementById("editarApellidoAlumno").value = alumno.apellido;
+
+    document.getElementById("ventanaEditarAlumno").style.display = "block";
+}
+
+function cerrarEdicionAlumno() {
+
+    document.getElementById("ventanaEditarAlumno").style.display = "none";
+
+    indiceAlumnoEditando = null;
+}
+
+function guardarEdicionAlumno() {
+
+    if (indiceAlumnoEditando === null) return;
+
+    const nombre = document.getElementById("editarNombreAlumno").value.trim();
+    const apellido = document.getElementById("editarApellidoAlumno").value.trim();
+
+    if (!nombre || !apellido) {
+        alert("Completá el nombre y apellido del alumno.");
+        return;
+    }
+
+    alumnosCursoActual[indiceAlumnoEditando].nombre = nombre;
+    alumnosCursoActual[indiceAlumnoEditando].apellido = apellido;
+
+    mostrarAlumnos();
+    cerrarEdicionAlumno();
+}
+
+// VENTANA COMÚN DE CONFIRMACIÓN
+
+let accionConfirmada = null;
+
+function mostrarConfirmacion(titulo, mensaje, accion) {
+
+    document.getElementById("tituloConfirmacion").textContent = titulo;
+    document.getElementById("mensajeConfirmacion").textContent = mensaje;
+
+    accionConfirmada = accion;
+
+    document.getElementById("ventanaConfirmacion").style.display = "flex";
+}
+
+function cerrarConfirmacion() {
+
+    document.getElementById("ventanaConfirmacion").style.display = "none";
+
+    accionConfirmada = null;
+}
+
+document.getElementById("btnConfirmarAccion").onclick = function () {
+
+    if (typeof accionConfirmada === "function") {
+        accionConfirmada();
+    }
+
+    cerrarConfirmacion();
+};
+
+
+function eliminarAlumno(indice) {
+
+    const alumno = alumnosCursoActual[indice];
+
+    mostrarConfirmacion(
+        "Eliminar alumno",
+        "¿Querés eliminar a " + alumno.apellido + ", " + alumno.nombre + "?",
+        function () {
+            alumnosCursoActual.splice(indice, 1);
+            mostrarAlumnos();
+        }
+    );
+
+}
+
+
+function abrirConfiguracionAgenda(planilla) {
+
+    planillaSeleccionada = planilla;
+
+    document.querySelector(".agenda-modulos").style.display = "none";
+
+    document.getElementById("configuracionAgenda").style.display = "block";
+
 }
 
 // CONTROL DEL BOTÓN ATRÁS DEL CELULAR
