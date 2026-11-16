@@ -85,27 +85,6 @@ header {
     box-shadow: 0 8px 25px rgba(0,0,0,.45);
 }
 
-/* CABECERA Y BOTÓN DE APARIENCIA */
-
-.perfil-cabecera {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.perfil .perfil-cabecera button {
-    width: auto;
-    margin: 0;
-    padding: 3px 0;
-    background: transparent !important;
-    border: none;
-    box-shadow: none;
-    color: var(--texto) !important;
-    font-size: 13px;
-    font-weight: bold;
-}
-
 /* DATOS DEL PERFIL */
 
 .perfil .datos {
@@ -229,224 +208,7 @@ header {
     line-height: 1.5;
     }
 
-    
-    body.modo-oscuro {
-      --fondo: #17212b;
-      --panel: #243241;
-      --texto: #edf3f8;
-      --suave: #b5c2cf;
-      --primario: #8db8df;
-      --primario-claro: #34495e;
-      --borde: #405365;
-      --sombra: 0 8px 24px rgba(0, 0, 0, .22);
-    }
-    body.modo-oscuro .dato { background: #1d2a37; }
-    body.modo-oscuro .boton,
-    body.modo-oscuro button:not(.secundario) { color: #142333; }
 
-
-/* ===== APARIENCIAS DE AGENDA DOCENTE ===== */
-
-/* HORIZONTE */
-body.oceano {
-    --fondo: #06283D;
-    --panel: #24577a;
-    --texto: #ffffff;
-    --suave: #d5e8f2;
-    --primario: #347ba8;
-    --primario-claro: #194765;
-    --borde: #4b91bd;
-    --sombra: 0 6px 18px rgba(0,0,0,.45);
-    background: #06283D;
-    color: #ffffff;
-}
-
-body.oceano header {
-    background: #0B4F6C;
-}
-
-/* NATURALEZA */
-body.bosque {
-    --fondo: #102A1B;
-    --panel: #315c42;
-    --texto: #ffffff;
-    --suave: #d9eadf;
-    --primario: #427653;
-    --primario-claro: #254b34;
-    --borde: #568568;
-    --sombra: 0 6px 18px rgba(0,0,0,.45);
-    background: #102A1B;
-    color: #ffffff;
-}
-
-body.bosque header {
-    background: #1B4332;
-}
-
-/* LAVANDA */
-body.crepusculo {
-    --fondo: #2B1B3A;
-    --panel: #553b70;
-    --texto: #ffffff;
-    --suave: #e5d9ef;
-    --primario: #70518f;
-    --primario-claro: #422d59;
-    --borde: #8b6aaa;
-    --sombra: 0 6px 18px rgba(0,0,0,.45);
-    background: #2B1B3A;
-    color: #ffffff;
-}
-
-body.crepusculo header {
-    background: #4A235A;
-}
-
-/* TIERRA */
-body.biblioteca {
-    --fondo: #2A1A0A;
-    --panel: #68482f;
-    --texto: #ffffff;
-    --suave: #eadbc9;
-    --primario: #8a6445;
-    --primario-claro: #50351f;
-    --borde: #aa835e;
-    --sombra: 0 6px 18px rgba(0,0,0,.45);
-    background: #2A1A0A;
-    color: #ffffff;
-}
-
-body.biblioteca header {
-    background: #4B2E13;
-}
-
-/* MEDIANOCHE */
-body.eclipse {
-    --fondo: #111111;
-    --panel: #30343a;
-    --texto: #ffffff;
-    --suave: #d5d8dc;
-    --primario: #454b52;
-    --primario-claro: #25292e;
-    --borde: #626970;
-    --sombra: 0 6px 18px rgba(0,0,0,.55);
-    background: radial-gradient(circle at top,#2a2a2a 0%,#111 35%,#000 100%);
-    color: #ffffff;
-}
-
-body.eclipse header {
-    background: #111;
-}
-
-/* DATOS Y TEXTOS */
-body.oceano .dato,
-body.bosque .dato,
-body.crepusculo .dato,
-body.biblioteca .dato,
-body.eclipse .dato {
-    background: rgba(0,0,0,.18);
-    border-color: var(--borde);
-    color: var(--texto);
-}
-.perfil h2,
-.seccion h2,
-.novedades h2 {
-    color: var(--texto);
-}
-
-/* ===== BOTONES SECUNDARIOS EN TEMAS ===== */
-
-body.oceano .acciones .secundario,
-body.bosque .acciones .secundario,
-body.crepusculo .acciones .secundario,
-body.biblioteca .acciones .secundario,
-body.eclipse .acciones .secundario {
-    color: #ffffff !important;
-    background: rgba(0, 0, 0, .18);
-    border-color: var(--borde);
-}
-
-    /* ===== POPUP DE APARIENCIA ===== */
-
-.panel-apariencia {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-
-    width: calc(100% - 36px);
-    max-width: 390px;
-    box-sizing: border-box;
-
-    padding: 25px 20px;
-    border-radius: 22px;
-
-    background: #ffffff;
-    color: #263445;
-
-    box-shadow:
-        0 0 0 100vmax rgba(15, 25, 40, 0.65),
-        0 15px 45px rgba(0, 0, 0, 0.25);
-
-    text-align: center;
-}
-
-.panel-apariencia h2 {
-    margin: 0 0 8px;
-    font-size: 23px;
-    color: #263445;
-}
-
-.panel-apariencia p {
-    margin: 0 0 22px;
-    color: #687586;
-    font-size: 14px;
-}
-
-.opciones-temas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.opciones-temas button {
-    min-height: 65px;
-    padding: 12px 8px;
-        border: 1px solid #dce3eb;
-    border-radius: 14px;
-
-    background: #f5f7fa;
-    color: #263445;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.opciones-temas button:active {
-    transform: scale(0.96);
-}
-
-#btnCerrarApariencia {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-
-    border: none;
-    border-radius: 12px;
-
-    background: #e9edf2;
-    color: #354456;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-}
-
-/* ===== FIN POPUP DE APARIENCIA ===== */
 
 /* =====================================
    AGENDA DOCENTE - PANTALLA PRINCIPAL
@@ -467,15 +229,15 @@ body.eclipse .acciones .secundario {
 
 .cabecera-agenda {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 12px;
     margin-bottom: 28px;
 }
 
 .cabecera-agenda h2 {
-    grid-column: 2;
-    grid-row: 1;
+    grid-column: 1 / -1;
+    grid-row: 2;
     text-align: center;
     margin: 0;
 }
@@ -486,33 +248,14 @@ body.eclipse .acciones .secundario {
     justify-self: start;
 }
 
-.espacio-cabecera {
-    grid-column: 3;
+.cabecera-agenda > button.btn-configuracion-agenda {
+    grid-column: 2;
     grid-row: 1;
+    justify-self: end;
+    white-space: nowrap;
 }
 
 /* LOGO */
-
-.agenda-logo {
-    width: 58px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    background: #e7eef8;
-    font-size: 30px;
-}
-
-.agenda-encabezado h1 {
-    margin: 0;
-    font-size: 30px;
-}
-
-.agenda-subtitulo {
-    margin: 5px 0 0;
-    color: #687386;
-}
 
 /* BIENVENIDA */
 
@@ -601,6 +344,69 @@ body.eclipse .acciones .secundario {
     box-sizing: border-box;
     border-radius: 8px;
     margin-bottom: 12px;
+}
+
+/* MENÚ DE OPCIONES DE CONFIGURACIÓN */
+
+#menuOpcionesConfiguracion {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* MENÚ DE CONFIGURACIÓN */
+
+#menuOpcionesConfiguracion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#menuOpcionesConfiguracion h2 {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+#menuOpcionesConfiguracion button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 58px;
+    padding: 15px 18px;
+    box-sizing: border-box;
+
+    background: var(--color-fondo, #f5f6f8);
+    color: var(--color-texto, #222222);
+
+    border: 1px solid var(--color-borde, #d5dbe3);
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+#menuOpcionesConfiguracion button:hover {
+    border-color: var(--color-principal, #6685a8);
+}
+
+/* ADAPTACIÓN A CELULARES */
+
+@media (max-width: 700px) {
+    #menuOpcionesConfiguracion {
+        gap: 12px;
+    }
+
+    #menuOpcionesConfiguracion button {
+        min-height: 62px;
+        padding: 16px;
+        font-size: 16px;
+    }
 }
 
 /* CELULARES */
@@ -859,28 +665,39 @@ body.eclipse .acciones .secundario {
     }
 
     /* CABECERA AGENDA */
+/* CABECERA AGENDA EN CELULARES */
 
-    .cabecera-agenda {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
+.cabecera-agenda {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 12px;
+}
 
-    .btn-volver-agenda {
-        align-self: flex-start;
-    }
+.btn-volver-agenda {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+}
 
-    .cabecera-agenda h2 {
-        position: static;
-        transform: none;
-        text-align: center;
-        width: 100%;
-    }
+.cabecera-agenda > button.btn-configuracion-agenda {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    white-space: nowrap;
+}
 
-    .espacio-cabecera {
-        display: none;
-    }
+.cabecera-agenda h2 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+}
+
+.espacio-cabecera {
+    display: none;
+}
 }
 
 /* CELULARES PEQUEÑOS */
@@ -1240,14 +1057,7 @@ body.eclipse .acciones .secundario {
     padding-right: 160px;
 }
 
-.perfil .dato-usuario #btnApariencia {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: auto;
-    flex: none;
-}
+
 
 /* ===== VENTANA PERFIL Y SERVICIO ===== */
 
@@ -1389,9 +1199,7 @@ body.eclipse .acciones .secundario {
             👤 Perfil y Servicio
         </button>
 
-        <button class="secundario" id="btnApariencia" type="button">
-            🎨 Cambiar apariencia
-        </button>
+        
     </div>
 <div id="ventanaPerfil" class="perfil-ventana">
 
@@ -1760,64 +1568,6 @@ body.eclipse .acciones .secundario {
     </div>
 
 </div>
-
-    <!-- ===== VENTANA DE APARIENCIA ===== -->
-
-    <section id="panelApariencia" class="panel-apariencia" style="display:none;">
-
-      <h2>🎨 Elegí tu apariencia</h2>
-      <p>Seleccioná el color que más te guste.</p>
-
-   <div class="opciones-temas">
-
-    <button type="button" onclick="cambiarTema('claro')">
-        ☀️ Día
-    </button>
-
-    <button type="button" onclick="cambiarTema('oceano')">
-        🌊 Horizonte
-    </button>
-
-    <button type="button" onclick="cambiarTema('bosque')">
-        🌿 Naturaleza
-    </button>
-
-    <button type="button" onclick="cambiarTema('crepusculo')">
-        💜 Lavanda
-    </button>
-
-    <button type="button" onclick="cambiarTema('biblioteca')">
-        🟤 Tierra
-    </button>
-
-    <button type="button" onclick="cambiarTema('eclipse')">
-        🌙 Medianoche
-    </button>
-
-</div>
-
-      <div style="margin-top:15px;text-align:center;">
-
-    <button type="button" id="btnGuardarTema">
-        💾 Guardar cambios
-    </button>
-
-    <div id="mensajeTema"
-         style="display:none;margin-top:10px;color:#228B22;font-size:14px;font-weight:bold;">
-        ✔ Configuración guardada
-    </div>
-
-    <button type="button" class="secundario" id="btnCerrarApariencia">
-        ❌ Cancelar
-    </button>
-
-</div>
-
-    </section>
-
-    <!-- ===== FIN VENTANA DE APARIENCIA ===== -->
-
-
    
 <section id="pantallaPrincipal" class="secciones" aria-label="Secciones principales">
 
@@ -1840,19 +1590,24 @@ body.eclipse .acciones .secundario {
 <section id="menuAgenda" class="agenda-contenedor" style="display:none;">
 
    
+<div class="cabecera-agenda">
 
-  <div class="cabecera-agenda">
+    <button class="btn-volver-agenda" type="button"
+        onclick="volverPantallaPrincipal()">
+        ⬅️ Volver
+    </button>
 
-  <button class="btn-volver-agenda" type="button"
-      onclick="volverPantallaPrincipal()">
-      ⬅️ Volver
-  </button>
+    <h2>📘 Agenda Docente</h2>
 
-  <h2>📘 Agenda Docente</h2>
-
-  <div class="espacio-cabecera"></div>
+    <button class="btn-configuracion-agenda" type="button"
+        onclick="abrirConfiguracionAgenda('')"
+        style="display:none;">
+        ⚙️ Configuración
+    </button>
 
 </div>
+
+
 <div class="agenda-modulos">
 
   <article class="agenda-tarjeta" onclick="abrirConfiguracionAgenda('asistencia')">
@@ -1873,14 +1628,45 @@ body.eclipse .acciones .secundario {
  
 <section id="configuracionAgenda" style="display:none;">
 
-    <h2>⚙️ Configuración inicial</h2>
+    <div id="menuOpcionesConfiguracion">
 
-    <p>Configurá los datos del ciclo lectivo para utilizar las planillas.</p>
+    <h2>⚙️ Configuración</h2>
 
-    <label>Año escolar</label>
+<button type="button" onclick="mostrarAnioEscolar()">
+    📅 Año escolar
+</button>
+
+
+    <button type="button">📆 Cuatrimestre</button>
+    <button type="button">🎓 Curso y materia</button>
+    <button type="button">🗓️ Fecha de inicio</button>
+    <button type="button">🏁 Fecha de finalización</button>
+    <button type="button">⏰ Días y horarios de cursada</button>
+    <button type="button">👥 Alumnos del curso</button>
+    <button type="button">📌 Días especiales</button>
+
+</div>
+
+<div id="formularioAnioEscolar" style="display:none;">
+
+    <h2>📅 Año escolar</h2>
+
+    <label for="anioEscolar">Año escolar</label>
     <input type="number" id="anioEscolar" placeholder="Ejemplo: 2026">
 
+    <button type="button" onclick="volverMenuConfiguracion()">
+        ⬅️ Volver a configuración
+    </button>
+
+</div>
+
+<div id="contenidoConfiguracionAnterior" style="display:none;">
+
+<h2>⚙️ Configuración inicial</h2>
+    <p>Configurá los datos del ciclo lectivo para utilizar las planillas.</p>
+   
     <label>Cuatrimestre</label>
+
     <select id="cuatrimestre">
         <option value="">Seleccionar</option>
         <option value="1">Primer cuatrimestre</option>
@@ -1899,11 +1685,11 @@ body.eclipse .acciones .secundario {
     <label>Fecha de finalización</label>
     <input type="date" id="fechaFin">
 
-    <label>Inicio del receso</label>
-    <input type="date" id="inicioReceso">
+   <label>Inicio de días especiales</label>
+<input type="date" id="inicioReceso">
 
-    <label>Finalización del receso</label>
-    <input type="date" id="finReceso">
+<label>Finalización de días especiales</label>
+<input type="date" id="finReceso">
 <hr>
 
 <h3>📅 Días y horarios de cursada</h3>
@@ -2538,75 +2324,6 @@ Escriba aquí su consulta.
     actualizarSaludo();
    actualizarDatosPerfil();
 
-// ===== APARIENCIA =====
-
-const btnApariencia = document.getElementById("btnApariencia");
-const panelApariencia = document.getElementById("panelApariencia");
-const btnCerrarApariencia = document.getElementById("btnCerrarApariencia");
-const btnGuardarTema = document.getElementById("btnGuardarTema");
-
-let temaAnterior = document.body.className;
-
-function cambiarTema(tema) {
-
-    document.body.classList.remove(
-        "modo-oscuro",
-        "oceano",
-        "bosque",
-        "crepusculo",
-        "biblioteca",
-        "eclipse"
-    );
-
-    if (tema !== "claro") {
-        document.body.classList.add(tema);
-    }
-}
-
-btnApariencia.addEventListener("click", function() {
-    temaAnterior = document.body.className;
-    panelApariencia.style.display = "block";
-});
-
-btnCerrarApariencia.addEventListener("click", function() {
-    document.body.className = temaAnterior;
-    panelApariencia.style.display = "none";
-});
-
-btnGuardarTema.addEventListener("click", function() {
-
-    const temas = [
-        "oceano",
-        "bosque",
-        "crepusculo",
-        "biblioteca",
-        "eclipse"
-    ];
-
-    const temaSeleccionado = temas.find(tema =>
-        document.body.classList.contains(tema)
-    ) || "claro";
-
-    localStorage.setItem("configuracionTema", JSON.stringify({
-        modo: "manual",
-        tema: temaSeleccionado
-    }));
-
-    temaAnterior = document.body.className;
-
-const mensaje = document.getElementById("mensajeTema");
-
-mensaje.style.display = "block";
-
-setTimeout(function() {
-
-    mensaje.style.display = "none";
-
-    panelApariencia.style.display = "none";
-
-}, 1000);
-
-});
 function mostrarMenuAgenda() {
 
     document.querySelector("header").style.display = "none";
@@ -2615,10 +2332,43 @@ function mostrarMenuAgenda() {
 
     document.getElementById("pantallaPrincipal").style.display = "none";
     document.getElementById("menuAgenda").style.display = "block";
-}
 
+}
 function volverPantallaPrincipal() {
 
+    const tarjetas = document.querySelector(".agenda-modulos");
+    const configuracion = document.getElementById("configuracionAgenda");
+    const titulo = document.querySelector(".cabecera-agenda h2");
+    const botonConfig = document.querySelector(".btn-configuracion-agenda");
+
+    // SI ESTAMOS EN CONFIGURACIÓN: VOLVER A MIS CURSOS
+    if (configuracion.style.display === "block") {
+
+        configuracion.style.display = "none";
+
+        titulo.textContent = "🎓 Mis Cursos";
+        titulo.style.display = "block";
+
+        botonConfig.style.display = "block";
+
+        return;
+    }
+
+    // SI ESTAMOS EN MIS CURSOS: VOLVER A AGENDA DOCENTE
+    if (tarjetas.style.display === "none") {
+
+        tarjetas.style.display = "grid";
+        configuracion.style.display = "none";
+
+        titulo.textContent = "📘 Agenda Docente";
+        titulo.style.display = "block";
+
+        botonConfig.style.display = "none";
+
+        return;
+    }
+
+    // SI ESTAMOS EN AGENDA DOCENTE: VOLVER A LA PANTALLA PRINCIPAL
     document.getElementById("menuAgenda").style.display = "none";
 
     document.querySelector("header").style.display = "";
@@ -2954,15 +2704,49 @@ function eliminarAlumno(indice) {
 
 }
 
-
 function abrirConfiguracionAgenda(planilla) {
 
     planillaSeleccionada = planilla;
 
-    document.querySelector(".agenda-modulos").style.display = "none";
+    const tarjetas = document.querySelector(".agenda-modulos");
+    const configuracion = document.getElementById("configuracionAgenda");
+    const titulo = document.querySelector(".cabecera-agenda h2");
+    const botonConfig = document.querySelector(".btn-configuracion-agenda");
 
-    document.getElementById("configuracionAgenda").style.display = "block";
+    // Entrar a una planilla: mostrar Mis Cursos
+    if (planilla !== "") {
 
+        tarjetas.style.display = "none";
+        configuracion.style.display = "none";
+
+        titulo.textContent = "🎓 Mis Cursos";
+        titulo.style.display = "block";
+
+        botonConfig.style.display = "block";
+
+        return;
+    }
+
+    // Abrir Configuración
+    tarjetas.style.display = "none";
+    configuracion.style.display = "block";
+
+    titulo.style.display = "none";
+    botonConfig.style.display = "none";
+
+    document.getElementById("menuOpcionesConfiguracion").style.display = "block";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+}
+
+function mostrarAnioEscolar() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioAnioEscolar").style.display = "block";
+}
+
+function volverMenuConfiguracion() {
+    document.getElementById("formularioAnioEscolar").style.display = "none";
+    document.getElementById("menuOpcionesConfiguracion").style.display = "block";
 }
 
 // CONTROL DEL BOTÓN ATRÁS DEL CELULAR
