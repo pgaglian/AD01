@@ -1636,14 +1636,38 @@ header {
     📅 Año escolar
 </button>
 
+<button type="button" onclick="mostrarCuatrimestre()">
+    📆 Cuatrimestre
+</button>
 
-    <button type="button">📆 Cuatrimestre</button>
-    <button type="button">🎓 Curso y materia</button>
-    <button type="button">🗓️ Fecha de inicio</button>
-    <button type="button">🏁 Fecha de finalización</button>
-    <button type="button">⏰ Días y horarios de cursada</button>
-    <button type="button">👥 Alumnos del curso</button>
-    <button type="button">📌 Días especiales</button>
+
+<button type="button" onclick="mostrarCursoMateria()">
+    🎓 Curso y materia
+</button>
+
+
+<button type="button" onclick="mostrarFechaInicio()">
+    🗓️ Fecha de inicio
+</button>
+
+
+<button type="button" onclick="mostrarFechaFinalizacion()">
+    🏁 Fecha de finalización
+</button>
+
+
+<button type="button" onclick="mostrarDiasHorarios()">
+    ⏰ Días y horarios de cursada
+</button>
+
+<button type="button" onclick="mostrarAlumnosCurso()">
+    👥 Alumnos del curso
+</button>
+
+
+<button type="button" onclick="mostrarDiasEspeciales()">
+    📌 Días especiales
+</button>
 
 </div>
 
@@ -1654,26 +1678,113 @@ header {
     <label for="anioEscolar">Año escolar</label>
     <input type="number" id="anioEscolar" placeholder="Ejemplo: 2026">
 
-    <button type="button" onclick="volverMenuConfiguracion()">
-        ⬅️ Volver a configuración
-    </button>
+  
 
 </div>
 
-<div id="contenidoConfiguracionAnterior" style="display:none;">
+<!-- FORMULARIO CUATRIMESTRE -->
+<div id="formularioCuatrimestre" style="display:none;">
 
-<h2>⚙️ Configuración inicial</h2>
-    <p>Configurá los datos del ciclo lectivo para utilizar las planillas.</p>
-   
-    <label>Cuatrimestre</label>
+    <h2>📆 Cuatrimestre</h2>
 
+    <label for="cuatrimestre">Cuatrimestre</label>
     <select id="cuatrimestre">
         <option value="">Seleccionar</option>
         <option value="1">Primer cuatrimestre</option>
         <option value="2">Segundo cuatrimestre</option>
     </select>
 
-    <label>Curso</label>
+   
+</div>
+
+<!-- FORMULARIO CURSO Y MATERIA -->
+<div id="formularioCursoMateria" style="display:none;">
+
+    <h2>🎓 Curso y materia</h2>
+
+    <label for="curso">Curso</label>
+    <input type="text" id="curso" placeholder="Ejemplo: 3° A">
+
+    <label for="materia">Materia</label>
+    <input type="text" id="materia" placeholder="Ejemplo: Matemática">
+
+</div>
+
+<!-- FORMULARIO FECHA DE INICIO -->
+<div id="formularioFechaInicio" style="display:none;">
+
+    <h2>🗓️ Fecha de inicio</h2>
+
+    <label for="fechaInicio">Fecha de inicio del curso</label>
+    <input type="date" id="fechaInicio">
+
+</div>
+
+<!-- FORMULARIO FECHA DE FINALIZACIÓN -->
+<div id="formularioFechaFinalizacion" style="display:none;">
+
+    <h2>🏁 Fecha de finalización</h2>
+
+    <label for="fechaFinalizacion">Fecha de finalización del curso</label>
+    <input type="date" id="fechaFinalizacion">
+
+</div>
+
+<!-- FORMULARIO DÍAS Y HORARIOS -->
+<div id="formularioDiasHorarios" style="display:none;">
+
+    <h2>⏰ Días y horarios de cursada</h2>
+
+    <label for="diaCursada">Día de cursada</label>
+    <select id="diaCursada">
+        <option value="">Seleccionar día</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miércoles">Miércoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sábado">Sábado</option>
+        <option value="Domingo">Domingo</option>
+    </select>
+
+    <label for="horaInicioCursada">Hora de inicio</label>
+    <input type="time" id="horaInicioCursada">
+
+    <label for="horaFinCursada">Hora de finalización</label>
+    <input type="time" id="horaFinCursada">
+
+</div>
+
+<!-- FORMULARIO ALUMNOS DEL CURSO -->
+<div id="formularioAlumnosCurso" style="display:none;">
+
+    <h2>👥 Alumnos del curso</h2>
+
+    <label for="nombreAlumno">Nombre y apellido</label>
+    <input type="text" id="nombreAlumno" placeholder="Ejemplo: Juan Pérez">
+
+</div>
+
+<!-- FORMULARIO DÍAS ESPECIALES -->
+<div id="formularioDiasEspeciales" style="display:none;">
+
+    <h2>📌 Días especiales</h2>
+
+    <label for="fechaDiaEspecial">Fecha</label>
+    <input type="date" id="fechaDiaEspecial">
+
+    <label for="descripcionDiaEspecial">Descripción</label>
+    <input type="text" id="descripcionDiaEspecial" placeholder="Ejemplo: Feriado, jornada institucional">
+
+</div>
+
+
+<div id="contenidoConfiguracionAnterior" style="display:none;">
+
+<h2>⚙️ Configuración inicial</h2>
+    <p>Configurá los datos del ciclo lectivo para utilizar las planillas.</p>
+   
+     <label>Curso</label>
     <input type="text" id="curso" placeholder="Ejemplo: 2° A">
 
     <label>Materia</label>
@@ -2334,12 +2445,41 @@ function mostrarMenuAgenda() {
     document.getElementById("menuAgenda").style.display = "block";
 
 }
+
 function volverPantallaPrincipal() {
 
     const tarjetas = document.querySelector(".agenda-modulos");
     const configuracion = document.getElementById("configuracionAgenda");
     const titulo = document.querySelector(".cabecera-agenda h2");
     const botonConfig = document.querySelector(".btn-configuracion-agenda");
+    
+
+
+    // SI ESTAMOS DENTRO DE UN FORMULARIO
+
+const formularioAnio = document.getElementById("formularioAnioEscolar");
+const formularioCuatrimestre = document.getElementById("formularioCuatrimestre");
+const formularioCursoMateria = document.getElementById("formularioCursoMateria");
+const formularioFechaInicio = document.getElementById("formularioFechaInicio");
+const formularioFechaFinalizacion = document.getElementById("formularioFechaFinalizacion");
+const formularioDiasHorarios = document.getElementById("formularioDiasHorarios");
+const formularioAlumnosCurso = document.getElementById("formularioAlumnosCurso");
+const formularioDiasEspeciales = document.getElementById("formularioDiasEspeciales");
+
+if (
+    formularioAnio.style.display === "block" ||
+    formularioCuatrimestre.style.display === "block" ||
+    formularioCursoMateria.style.display === "block" ||
+    formularioFechaInicio.style.display === "block" ||
+    formularioFechaFinalizacion.style.display === "block" ||
+    formularioDiasHorarios.style.display === "block" ||
+    formularioAlumnosCurso.style.display === "block" ||
+    formularioDiasEspeciales.style.display === "block"
+) {
+    volverMenuConfiguracion();
+    return;
+}
+
 
     // SI ESTAMOS EN CONFIGURACIÓN: VOLVER A MIS CURSOS
     if (configuracion.style.display === "block") {
@@ -2368,7 +2508,7 @@ function volverPantallaPrincipal() {
         return;
     }
 
-    // SI ESTAMOS EN AGENDA DOCENTE: VOLVER A LA PANTALLA PRINCIPAL
+    // SI ESTAMOS EN AGENDA DOCENTE: VOLVER AL MENÚ PRINCIPAL
     document.getElementById("menuAgenda").style.display = "none";
 
     document.querySelector("header").style.display = "";
@@ -2736,6 +2876,9 @@ function abrirConfiguracionAgenda(planilla) {
 
     document.getElementById("menuOpcionesConfiguracion").style.display = "block";
     document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioAnioEscolar").style.display = "none";
+    document.getElementById("formularioCuatrimestre").style.display = "none";
+
 }
 
 function mostrarAnioEscolar() {
@@ -2744,8 +2887,58 @@ function mostrarAnioEscolar() {
     document.getElementById("formularioAnioEscolar").style.display = "block";
 }
 
+function mostrarCuatrimestre() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioCuatrimestre").style.display = "block";
+}
+
+function mostrarCursoMateria() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioCursoMateria").style.display = "block";
+}
+
+function mostrarFechaInicio() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioFechaInicio").style.display = "block";
+}
+
+function mostrarFechaFinalizacion() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioFechaFinalizacion").style.display = "block";
+}
+
+function mostrarDiasHorarios() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioDiasHorarios").style.display = "block";
+}
+
+function mostrarAlumnosCurso() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioAlumnosCurso").style.display = "block";
+}
+
+function mostrarDiasEspeciales() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioDiasEspeciales").style.display = "block";
+}
+
 function volverMenuConfiguracion() {
     document.getElementById("formularioAnioEscolar").style.display = "none";
+    document.getElementById("formularioCuatrimestre").style.display = "none";
+    document.getElementById("formularioCursoMateria").style.display = "none";
+    document.getElementById("formularioFechaInicio").style.display = "none";
+    document.getElementById("formularioFechaFinalizacion").style.display = "none";
+    document.getElementById("formularioDiasHorarios").style.display = "none";
+    document.getElementById("formularioAlumnosCurso").style.display = "none";
+    document.getElementById("formularioDiasEspeciales").style.display = "none";
+
     document.getElementById("menuOpcionesConfiguracion").style.display = "block";
 }
 
