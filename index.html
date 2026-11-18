@@ -464,7 +464,7 @@ header {
     }
 }
 
-/* ALUMNOS DEL CURSO */
+/* ALUMNOS */
 
 #contenedorAlumnos {
     margin-top: 25px;
@@ -512,11 +512,11 @@ header {
 }
 
 
-
 /* VENTANAS DE EDICIÓN */
 
 #ventanaHorarios,
-#ventanaEditarAlumno {
+#ventanaEditarAlumno,
+#ventanaEditarHorario {
     width: 100%;
     max-width: 450px;
     margin: 20px auto;
@@ -529,20 +529,24 @@ header {
 }
 
 #ventanaHorarios h3,
-#ventanaEditarAlumno h3 {
+#ventanaEditarAlumno h3,
+#ventanaEditarHorario h3 {
     margin: 0 0 20px;
     text-align: center;
 }
 
 #ventanaHorarios label,
-#ventanaEditarAlumno label {
+#ventanaEditarAlumno label,
+#ventanaEditarHorario label {
     display: block;
     margin: 14px 0 7px;
     font-weight: bold;
 }
 
 #ventanaHorarios input,
-#ventanaEditarAlumno input {
+#ventanaEditarAlumno input,
+#ventanaEditarHorario input,
+#ventanaEditarHorario select {
     width: 100%;
     min-width: 0;
     padding: 12px;
@@ -553,7 +557,8 @@ header {
 }
 
 #ventanaHorarios button,
-#ventanaEditarAlumno button {
+#ventanaEditarAlumno button,
+#ventanaEditarHorario button {
     min-height: 42px;
     padding: 10px 16px;
     margin: 6px 4px 0 0;
@@ -627,8 +632,9 @@ header {
         padding: 16px 12px;
     }
 
-    #ventanaHorarios,
-    #ventanaEditarAlumno {
+        #ventanaHorarios,
+    #ventanaEditarAlumno,
+    #ventanaEditarHorario {
         width: 100%;
         max-width: 100%;
         margin: 16px auto;
@@ -636,7 +642,8 @@ header {
     }
 
     #ventanaHorarios button,
-    #ventanaEditarAlumno button {
+    #ventanaEditarAlumno button,
+    #ventanaEditarHorario button {
         margin: 6px 0;
     }
 
@@ -1621,11 +1628,21 @@ header {
     <h3>Planilla de actividades</h3>
     <p>Registro de actividades, temas, notas y valoraciones.</p>
   </article>
+</div>
+
+
+<!-- LISTA DE CURSOS CREADOS -->
+
+<div id="listaMisCursos" style="display:none;">
+
+    <div id="cursosRegistrados">
+        <!-- Los cursos creados aparecerán aquí -->
+    </div>
 
 </div>
 
 <!-- CONFIGURACIÓN COMPARTIDA DE AGENDA -->
- 
+
 <section id="configuracionAgenda" style="display:none;">
 
     <div id="menuOpcionesConfiguracion">
@@ -1661,7 +1678,7 @@ header {
 </button>
 
 <button type="button" onclick="mostrarAlumnosCurso()">
-    👥 Alumnos del curso
+    👥 Alumnos
 </button>
 
 
@@ -1750,31 +1767,125 @@ header {
     <label for="horaInicioCursada">Hora de inicio</label>
     <input type="time" id="horaInicioCursada">
 
-    <label for="horaFinCursada">Hora de finalización</label>
-    <input type="time" id="horaFinCursada">
+  <label for="horaFinCursada">Hora de finalización</label>
+<input type="time" id="horaFinCursada">
+
+<button type="button" onclick="agregarHorarioFormulario()">
+    ➕ Agregar horario
+</button>
+
+<button type="button" id="btnCancelarEdicionHorario"
+    onclick="cancelarEdicionHorarioFormulario()"
+    style="display:none;">
+    ❌ Cancelar edición
+</button>
+
+
+<div id="listaHorariosCursada"></div>
+
+<!-- VENTANA DE EDICIÓN DE HORARIOS -->
+<div id="ventanaEditarHorario" style="display:none;">
+
+    <h3>✏️ Editar horario</h3>
+
+    <label for="editarDiaHorario">Día de cursada</label>
+    <select id="editarDiaHorario">
+        <option value="">Seleccionar día</option>
+        <option value="lunes">Lunes</option>
+        <option value="martes">Martes</option>
+        <option value="miercoles">Miércoles</option>
+        <option value="jueves">Jueves</option>
+        <option value="viernes">Viernes</option>
+        <option value="sabado">Sábado</option>
+        <option value="domingo">Domingo</option>
+    </select>
+
+    <label for="editarHoraInicioHorario">Hora de inicio</label>
+    <input type="time" id="editarHoraInicioHorario">
+
+    <label for="editarHoraFinHorario">Hora de finalización</label>
+    <input type="time" id="editarHoraFinHorario">
+
+    <button type="button" onclick="guardarEdicionHorario()">
+        Guardar cambios
+    </button>
+
+    <button type="button" onclick="cerrarEdicionHorario()">
+        Cancelar
+    </button>
 
 </div>
 
-<!-- FORMULARIO ALUMNOS DEL CURSO -->
+</div>
+
+
+
+<!-- FORMULARIO ALUMNOS -->
 <div id="formularioAlumnosCurso" style="display:none;">
 
-    <h2>👥 Alumnos del curso</h2>
+    <h2>👥 Alumnos</h2>
 
-    <label for="nombreAlumno">Nombre y apellido</label>
-    <input type="text" id="nombreAlumno" placeholder="Ejemplo: Juan Pérez">
+    <p>Administrá los alumnos que pertenecen a este curso.</p>
+
+    <div id="contenedorAlumnos">
+
+        <label for="nombreAlumno">Nombre</label>
+        <input type="text" id="nombreAlumno" placeholder="Nombre del alumno">
+
+        <label for="apellidoAlumno">Apellido</label>
+        <input type="text" id="apellidoAlumno" placeholder="Apellido del alumno">
+
+        <button type="button" onclick="agregarAlumno()">
+            ➕ Agregar alumno
+        </button>
+
+        <div id="listaAlumnos"></div>
+
+    </div>
+
+    <!-- VENTANA DE EDICIÓN DE ALUMNOS -->
+    <div id="ventanaEditarAlumno" style="display:none;">
+
+        <h3>✏️ Editar alumno</h3>
+
+        <label for="editarNombreAlumno">Nombre</label>
+        <input type="text" id="editarNombreAlumno">
+
+        <label for="editarApellidoAlumno">Apellido</label>
+        <input type="text" id="editarApellidoAlumno">
+
+        <button type="button" onclick="guardarEdicionAlumno()">
+            Guardar cambios
+        </button>
+
+        <button type="button" onclick="cerrarEdicionAlumno()">
+            Cancelar
+        </button>
+
+    </div>
 
 </div>
+
 
 <!-- FORMULARIO DÍAS ESPECIALES -->
 <div id="formularioDiasEspeciales" style="display:none;">
 
     <h2>📌 Días especiales</h2>
 
+    <p>Registrá feriados, jornadas institucionales y otros días sin actividad habitual.</p>
+
     <label for="fechaDiaEspecial">Fecha</label>
     <input type="date" id="fechaDiaEspecial">
 
     <label for="descripcionDiaEspecial">Descripción</label>
-    <input type="text" id="descripcionDiaEspecial" placeholder="Ejemplo: Feriado, jornada institucional">
+    <input type="text" id="descripcionDiaEspecial"
+           placeholder="Ejemplo: Feriado, jornada institucional">
+
+    <button type="button" onclick="agregarDiaEspecial()">
+        ➕ Agregar día especial
+    </button>
+
+    <div id="listaDiasEspeciales"></div>
 
 </div>
 
@@ -1856,72 +1967,6 @@ header {
 
 </div>
 
-<!-- VENTANA DE CONFIRMACIÓN -->
-
-<div id="ventanaConfirmacion" style="display:none;">
-
-    <div class="contenido-confirmacion">
-
-        <h3 id="tituloConfirmacion">Confirmar acción</h3>
-
-        <p id="mensajeConfirmacion">¿Querés continuar?</p>
-
-        <button type="button" id="btnConfirmarAccion">
-            Confirmar
-        </button>
-
-        <button type="button" onclick="cerrarConfirmacion()">
-            Cancelar
-        </button>
-
-    </div>
-
-</div>
-
-<!-- ALUMNOS DEL CURSO -->
-<div id="contenedorAlumnos">
-
-    <h3>👥 Alumnos del curso</h3>
-
-    <p>Administrá los alumnos que pertenecen a este curso.</p>
-
-    <div>
-        <label for="nombreAlumno">Nombre</label>
-        <input type="text" id="nombreAlumno" placeholder="Nombre del alumno">
-
-        <label for="apellidoAlumno">Apellido</label>
-        <input type="text" id="apellidoAlumno" placeholder="Apellido del alumno">
-
-        <button type="button" onclick="agregarAlumno()">
-            ➕ Agregar alumno
-        </button>
-    </div>
-
-    <div id="listaAlumnos"></div>
-
-</div>
-
-<!-- VENTANA DE EDICIÓN DE ALUMNOS -->
-
-<div id="ventanaEditarAlumno" style="display:none;">
-
-    <h3>✏️ Editar alumno</h3>
-
-    <label for="editarNombreAlumno">Nombre</label>
-    <input type="text" id="editarNombreAlumno">
-
-    <label for="editarApellidoAlumno">Apellido</label>
-    <input type="text" id="editarApellidoAlumno">
-
-    <button type="button" onclick="guardarEdicionAlumno()">
-        Guardar cambios
-    </button>
-
-    <button type="button" onclick="cerrarEdicionAlumno()">
-        Cancelar
-    </button>
-
-</div>
 
 </section>
 
@@ -1937,6 +1982,28 @@ header {
     </section>
 
   </main>
+
+  <!-- VENTANA DE CONFIRMACIÓN -->
+
+<div id="ventanaConfirmacion" style="display:none;">
+
+    <div class="contenido-confirmacion">
+
+        <h3 id="tituloConfirmacion">Confirmar acción</h3>
+
+        <p id="mensajeConfirmacion">¿Querés continuar?</p>
+
+        <button type="button" id="btnConfirmarAccion">
+            Confirmar
+        </button>
+
+        <button type="button" id="btnCancelarConfirmacion" onclick="cerrarConfirmacion()">
+             Cancelar
+        </button>         
+
+    </div>
+
+</div>
 
   <script>
 
@@ -2532,6 +2599,8 @@ let alumnosCursoActual = [];
 let diaHorarioSeleccionado = "";
 let indiceHorarioEditando = null;
 let horariosCursada = {};
+let diaHorarioFormularioEditando = null;
+let indiceHorarioFormularioEditando = null;
 
 function configurarHorario(dia) {
 
@@ -2696,6 +2765,284 @@ function mostrarHorariosConfigurados() {
     }
 }
 
+// =====================================
+// NUEVO FORMULARIO DE DÍAS Y HORARIOS
+// =====================================
+
+const diasFormularioHorarios = [
+    { nombre: "Lunes", clave: "lunes" },
+    { nombre: "Martes", clave: "martes" },
+    { nombre: "Miércoles", clave: "miercoles" },
+    { nombre: "Jueves", clave: "jueves" },
+    { nombre: "Viernes", clave: "viernes" },
+    { nombre: "Sábado", clave: "sabado" },
+    { nombre: "Domingo", clave: "domingo" }
+];
+
+function agregarHorarioFormulario(){
+
+    const diaSeleccionado = document.getElementById("diaCursada").value;
+    const horaInicio = document.getElementById("horaInicioCursada").value;
+    const horaFin = document.getElementById("horaFinCursada").value;
+
+    // Validar campos obligatorios.
+    if(!diaSeleccionado || !horaInicio || !horaFin){
+
+        mostrarConfirmacion(
+            "Datos incompletos",
+            "Completá el día, la hora de inicio y la hora de finalización.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    // Validar orden de las horas.
+    if(horaInicio >= horaFin){
+
+        mostrarConfirmacion(
+            "Horario incorrecto",
+            "La hora de inicio debe ser anterior a la hora de finalización.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    // Validar horarios anteriores a las 06:00.
+    if(horaInicio < "06:00" || horaFin < "06:00"){
+
+        mostrarConfirmacion(
+            "Horario no válido",
+            "El horario ingresado no es válido. Verificá los datos e intentá nuevamente.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    // Función que realiza el guardado del horario.
+    function guardarHorario(){
+
+        const dia = diasFormularioHorarios.find(
+            item => item.nombre === diaSeleccionado
+        ).clave;
+
+        if(!horariosCursada[dia]){
+            horariosCursada[dia] = [];
+        }
+
+        if(diaHorarioFormularioEditando !== null){
+
+            horariosCursada[diaHorarioFormularioEditando]
+                [indiceHorarioFormularioEditando] = {
+                    inicio: horaInicio,
+                    fin: horaFin
+                };
+
+        }else{
+
+            horariosCursada[dia].push({
+                inicio: horaInicio,
+                fin: horaFin
+            });
+
+        }
+
+        guardarBorradorCurso();
+        cancelarEdicionHorarioFormulario();
+        mostrarHorariosFormulario();
+    }
+
+    guardarHorario();
+}
+
+function mostrarHorariosFormulario() {
+
+    const lista = document.getElementById("listaHorariosCursada");
+
+    lista.innerHTML = "";
+
+    diasFormularioHorarios.forEach(item => {
+
+        const horarios = horariosCursada[item.clave];
+
+        if (!horarios || horarios.length === 0) return;
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = item.nombre;
+        lista.appendChild(titulo);
+
+        horarios.forEach((horario, indice) => {
+
+            const fila = document.createElement("div");
+            fila.className = "fila-alumno";
+
+            const nombre = document.createElement("span");
+            nombre.textContent = horario.inicio + " a " + horario.fin;
+
+            const acciones = document.createElement("div");
+            acciones.className = "acciones-horario";
+
+            const editar = document.createElement("button");
+            editar.type = "button";
+            editar.textContent = "✏️";
+            editar.title = "Editar horario";
+            editar.onclick = () => editarHorarioFormulario(item.clave, indice);
+
+            const eliminar = document.createElement("button");
+            eliminar.type = "button";
+            eliminar.textContent = "🗑️";
+            eliminar.title = "Eliminar horario";
+            eliminar.onclick = () => eliminarHorarioFormulario(item.clave, indice);
+
+            acciones.appendChild(editar);
+            acciones.appendChild(eliminar);
+
+            fila.appendChild(nombre);
+            fila.appendChild(acciones);
+
+            lista.appendChild(fila);
+
+        });
+
+    });
+
+   
+}
+
+function editarHorarioFormulario(dia, indice){
+
+    const horario = horariosCursada[dia][indice];
+
+    diaHorarioFormularioEditando = dia;
+    indiceHorarioFormularioEditando = indice;
+
+    document.getElementById("editarDiaHorario").value = dia;
+    document.getElementById("editarHoraInicioHorario").value = horario.inicio;
+    document.getElementById("editarHoraFinHorario").value = horario.fin;
+
+    document.getElementById("ventanaEditarHorario").style.display = "block";
+}
+
+
+function guardarEdicionHorario(){
+
+    if(diaHorarioFormularioEditando === null) return;
+
+    const diaNuevo = document.getElementById("editarDiaHorario").value;
+    const horaInicio = document.getElementById("editarHoraInicioHorario").value;
+    const horaFin = document.getElementById("editarHoraFinHorario").value;
+
+    if(!diaNuevo || !horaInicio || !horaFin){
+
+        mostrarConfirmacion(
+            "Datos incompletos",
+            "Completá el día, la hora de inicio y la hora de finalización.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    if(horaInicio >= horaFin){
+
+        mostrarConfirmacion(
+            "Horario incorrecto",
+            "La hora de inicio debe ser anterior a la hora de finalización.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    if(horaInicio < "06:00" || horaFin < "06:00"){
+
+        mostrarConfirmacion(
+            "Horario no válido",
+            "El horario ingresado no es válido. Verificá los datos e intentá nuevamente.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    const horarioActualizado = {
+        inicio: horaInicio,
+        fin: horaFin
+    };
+
+    horariosCursada[diaHorarioFormularioEditando].splice(
+        indiceHorarioFormularioEditando,
+        1
+    );
+
+    if(horariosCursada[diaHorarioFormularioEditando].length === 0){
+        delete horariosCursada[diaHorarioFormularioEditando];
+    }
+
+    if(!horariosCursada[diaNuevo]){
+        horariosCursada[diaNuevo] = [];
+    }
+
+    horariosCursada[diaNuevo].push(horarioActualizado);
+
+    guardarBorradorCurso();
+
+    cerrarEdicionHorario();
+    cancelarEdicionHorarioFormulario();
+    mostrarHorariosFormulario();
+}
+
+
+function cerrarEdicionHorario(){
+
+    document.getElementById("ventanaEditarHorario").style.display = "none";
+
+    diaHorarioFormularioEditando = null;
+    indiceHorarioFormularioEditando = null;
+}
+
+
+
+function cancelarEdicionHorarioFormulario(){
+
+    diaHorarioFormularioEditando = null;
+    indiceHorarioFormularioEditando = null;
+
+    document.getElementById("diaCursada").value = "";
+    document.getElementById("horaInicioCursada").value = "";
+    document.getElementById("horaFinCursada").value = "";
+
+}
+
+function eliminarHorarioFormulario(dia, indice){
+
+    mostrarConfirmacion(
+        "Eliminar horario",
+        "¿Estás seguro de que querés eliminar este horario?",
+        function(){
+
+            horariosCursada[dia].splice(indice, 1);
+
+            if(horariosCursada[dia].length === 0){
+                delete horariosCursada[dia];
+            }
+
+            cancelarEdicionHorarioFormulario();
+            mostrarHorariosFormulario();
+
+        }
+    );
+
+}
+
 // CARGA DE ALUMNOS
 
 function agregarAlumno() {
@@ -2802,12 +3149,18 @@ function guardarEdicionAlumno() {
 
 let accionConfirmada = null;
 
-function mostrarConfirmacion(titulo, mensaje, accion) {
+function mostrarConfirmacion(titulo, mensaje, accion, soloAceptar = false) {
 
     document.getElementById("tituloConfirmacion").textContent = titulo;
     document.getElementById("mensajeConfirmacion").textContent = mensaje;
 
     accionConfirmada = accion;
+
+    document.getElementById("btnCancelarConfirmacion").style.display =
+        soloAceptar ? "none" : "inline-block";
+
+    document.getElementById("btnConfirmarAccion").textContent =
+        soloAceptar ? "OK" : "Confirmar";
 
     document.getElementById("ventanaConfirmacion").style.display = "flex";
 }
@@ -2844,6 +3197,147 @@ function eliminarAlumno(indice) {
 
 }
 
+// ================================
+// DÍAS ESPECIALES
+// ================================
+
+let diasEspeciales = [];
+let indiceDiaEspecialEditando = null;
+
+function agregarDiaEspecial() {
+
+    const fecha = document.getElementById("fechaDiaEspecial").value;
+    const descripcion = document.getElementById("descripcionDiaEspecial").value.trim();
+
+    if (!fecha || !descripcion) {
+        alert("Completá la fecha y la descripción.");
+        return;
+    }
+
+    diasEspeciales.push({
+        fecha: fecha,
+        descripcion: descripcion
+    });
+
+    document.getElementById("fechaDiaEspecial").value = "";
+    document.getElementById("descripcionDiaEspecial").value = "";
+
+    mostrarDiasEspecialesConfigurados();
+}
+
+function mostrarDiasEspecialesConfigurados() {
+
+    const lista = document.getElementById("listaDiasEspeciales");
+
+    lista.innerHTML = "";
+
+    diasEspeciales.sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+    diasEspeciales.forEach((dia, indice) => {
+
+        const fila = document.createElement("div");
+        fila.className = "fila-horario";
+
+        const informacion = document.createElement("span");
+        informacion.textContent =
+            new Date(dia.fecha + "T00:00:00").toLocaleDateString("es-AR") +
+            " - " + dia.descripcion;
+
+        const acciones = document.createElement("div");
+        acciones.className = "acciones-horario";
+
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.textContent = "✏️";
+        editar.title = "Editar día especial";
+        editar.onclick = () => editarDiaEspecial(indice);
+
+        const eliminar = document.createElement("button");
+        eliminar.type = "button";
+        eliminar.textContent = "🗑️";
+        eliminar.title = "Eliminar día especial";
+        eliminar.onclick = () => eliminarDiaEspecial(indice);
+
+        acciones.appendChild(editar);
+        acciones.appendChild(eliminar);
+
+        fila.appendChild(informacion);
+        fila.appendChild(acciones);
+
+        lista.appendChild(fila);
+    });
+}
+
+function editarDiaEspecial(indice) {
+
+    const dia = diasEspeciales[indice];
+
+    document.getElementById("fechaDiaEspecial").value = dia.fecha;
+    document.getElementById("descripcionDiaEspecial").value = dia.descripcion;
+
+    indiceDiaEspecialEditando = indice;
+
+    const boton = document.querySelector(
+        '#formularioDiasEspeciales button[onclick="agregarDiaEspecial()"]'
+    );
+
+    boton.textContent = "💾 Guardar cambios";
+    boton.onclick = guardarEdicionDiaEspecial;
+}
+
+function guardarEdicionDiaEspecial() {
+
+    if (indiceDiaEspecialEditando === null) return;
+
+    const fecha = document.getElementById("fechaDiaEspecial").value;
+    const descripcion = document.getElementById("descripcionDiaEspecial").value.trim();
+
+    if (!fecha || !descripcion) {
+        alert("Completá la fecha y la descripción.");
+        return;
+    }
+
+    diasEspeciales[indiceDiaEspecialEditando] = {
+        fecha: fecha,
+        descripcion: descripcion
+    };
+
+    cancelarEdicionDiaEspecial();
+    mostrarDiasEspecialesConfigurados();
+}
+
+function cancelarEdicionDiaEspecial() {
+
+    indiceDiaEspecialEditando = null;
+
+    document.getElementById("fechaDiaEspecial").value = "";
+    document.getElementById("descripcionDiaEspecial").value = "";
+
+    const boton = document.querySelector(
+        '#formularioDiasEspeciales button'
+    );
+
+    boton.textContent = "➕ Agregar día especial";
+    boton.onclick = agregarDiaEspecial;
+}
+
+function eliminarDiaEspecial(indice) {
+
+    const dia = diasEspeciales[indice];
+
+    mostrarConfirmacion(
+        "Eliminar día especial",
+        "¿Querés eliminar " + dia.descripcion + " del " +
+        new Date(dia.fecha + "T00:00:00").toLocaleDateString("es-AR") + "?",
+        function () {
+
+            diasEspeciales.splice(indice, 1);
+
+            mostrarDiasEspecialesConfigurados();
+        }
+    );
+}
+
 function abrirConfiguracionAgenda(planilla) {
 
     planillaSeleccionada = planilla;
@@ -2855,20 +3349,18 @@ function abrirConfiguracionAgenda(planilla) {
 
     // Entrar a una planilla: mostrar Mis Cursos
     if (planilla !== "") {
-
-        tarjetas.style.display = "none";
-        configuracion.style.display = "none";
-
-        titulo.textContent = "🎓 Mis Cursos";
-        titulo.style.display = "block";
-
-        botonConfig.style.display = "block";
-
-        return;
-    }
+    tarjetas.style.display = "none";
+    configuracion.style.display = "none";
+    titulo.textContent = "🎓 Mis Cursos";
+    titulo.style.display = "block";
+    botonConfig.style.display = "block";
+    document.getElementById("listaMisCursos").style.display = "block";
+    return;
+}
 
     // Abrir Configuración
     tarjetas.style.display = "none";
+    document.getElementById("listaMisCursos").style.display = "none";
     configuracion.style.display = "block";
 
     titulo.style.display = "none";
@@ -2910,11 +3402,12 @@ function mostrarFechaFinalizacion() {
     document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
     document.getElementById("formularioFechaFinalizacion").style.display = "block";
 }
-
 function mostrarDiasHorarios() {
     document.getElementById("menuOpcionesConfiguracion").style.display = "none";
     document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
     document.getElementById("formularioDiasHorarios").style.display = "block";
+
+    mostrarHorariosFormulario();
 }
 
 function mostrarAlumnosCurso() {
@@ -2942,6 +3435,7 @@ function volverMenuConfiguracion() {
     document.getElementById("menuOpcionesConfiguracion").style.display = "block";
 }
 
+
 // CONTROL DEL BOTÓN ATRÁS DEL CELULAR
 
 history.pushState({ pantalla: "agenda" }, "", "#agenda");
@@ -2967,6 +3461,114 @@ document.getElementById("btnPerfilServicio").addEventListener("click", function(
 document.getElementById("btnCerrarPerfil").addEventListener("click", function() {
     document.getElementById("ventanaPerfil").style.display = "none";
 });
+
+
+
+// =============================================
+// BORRADOR AUTOMÁTICO DE CONFIGURACIÓN DEL CURSO
+// =============================================
+
+const CLAVE_BORRADOR_CURSO = "agendaDocente_borradorCurso";
+
+function guardarBorradorCurso() {
+
+    const borrador = {
+        anioEscolar: document.getElementById("anioEscolar").value,
+        cuatrimestre: document.getElementById("cuatrimestre").value,
+        curso: document.getElementById("curso").value,
+        materia: document.getElementById("materia").value,
+        fechaInicio: document.getElementById("fechaInicio").value,
+        fechaFinalizacion: document.getElementById("fechaFinalizacion").value,
+
+        horariosCursada: horariosCursada,
+        alumnosCursoActual: alumnosCursoActual,
+        diasEspeciales: diasEspeciales
+    };
+
+    try {
+        localStorage.setItem(
+            CLAVE_BORRADOR_CURSO,
+            JSON.stringify(borrador)
+        );
+    } catch (error) {
+        console.error("No se pudo guardar el borrador:", error);
+    }
+}
+
+
+function recuperarBorradorCurso() {
+
+    const datosGuardados = localStorage.getItem(
+        CLAVE_BORRADOR_CURSO
+    );
+
+    if (!datosGuardados) return;
+
+    try {
+
+        const borrador = JSON.parse(datosGuardados);
+
+        document.getElementById("anioEscolar").value =
+            borrador.anioEscolar || "";
+
+        document.getElementById("cuatrimestre").value =
+            borrador.cuatrimestre || "";
+
+        document.getElementById("curso").value =
+            borrador.curso || "";
+
+        document.getElementById("materia").value =
+            borrador.materia || "";
+
+        document.getElementById("fechaInicio").value =
+            borrador.fechaInicio || "";
+
+        document.getElementById("fechaFinalizacion").value =
+            borrador.fechaFinalizacion || "";
+
+        horariosCursada = borrador.horariosCursada || {};
+
+        alumnosCursoActual = borrador.alumnosCursoActual || [];
+
+        diasEspeciales = borrador.diasEspeciales || [];
+
+        mostrarHorariosFormulario();
+        mostrarAlumnos();
+        mostrarDiasEspecialesConfigurados();
+
+    } catch (error) {
+
+        console.error("No se pudo recuperar el borrador:", error);
+
+    }
+}
+
+
+// Guardar automáticamente los campos al modificarlos.
+
+[
+    "anioEscolar",
+    "cuatrimestre",
+    "curso",
+    "materia",
+    "fechaInicio",
+    "fechaFinalizacion"
+].forEach(id => {
+
+    const campo = document.getElementById(id);
+
+    if (campo) {
+        campo.addEventListener("input", guardarBorradorCurso);
+        campo.addEventListener("change", guardarBorradorCurso);
+    }
+
+});
+
+
+// Recuperar el borrador al iniciar la aplicación.
+
+recuperarBorradorCurso();
+
 
   </script>
 
