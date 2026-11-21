@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#243b53">
   <link rel="manifest" href="./manifest.json">
   <title>Agenda Docente</title>
+  
   <style>
     :root {
       --fondo: #f3f6fa;
@@ -320,6 +321,56 @@ header {
     box-sizing: border-box;
 }
 
+/* PANEL DE CONDICIONES */
+
+#formularioCondiciones {
+    width: 100%;
+    max-width: 750px;
+    margin: 20px auto;
+    padding: 24px;
+    box-sizing: border-box;
+    background: var(--color-tarjeta, #ffffff);
+    border: 1px solid #dce2ea;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+#tablaCondiciones {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+#tablaCondiciones td {
+    padding: 12px;
+    background: #ffffff;
+    border-top: 1px solid #dce2ea;
+    border-bottom: 1px solid #dce2ea;
+}
+
+#tablaCondiciones td:first-child {
+    border-left: 1px solid #dce2ea;
+    border-radius: 8px 0 0 8px;
+}
+
+#tablaCondiciones td:last-child {
+    border-right: 1px solid #dce2ea;
+    border-radius: 0 8px 8px 0;
+}
+
+#formularioCondiciones #tablaCondiciones td {
+    text-align: center;
+}
+
+#formularioCondiciones .acciones-horario {
+    justify-content: center;
+}
+
+#formularioCondiciones table {
+    width: 100%;
+    table-layout: auto;
+}
+
 #configuracionAgenda h2 {
     text-align: center;
     margin-bottom: 15px;
@@ -486,10 +537,10 @@ header {
 }
 
 .fila-alumno {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 35px 90px;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
     padding: 12px;
     margin-top: 8px;
     background: white;
@@ -497,7 +548,33 @@ header {
     border-radius: 8px;
 }
 
+.condicion-alumno {
+    text-align: center;
+    font-weight: bold;
+}
+
+.fila-alumno .acciones-horario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
 .fila-alumno button {
+    padding: 7px 10px;
+    border: 1px solid #dce2ea;
+    border-radius: 7px;
+    background: white;
+    cursor: pointer;
+}
+
+.fila-condicion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+}
+
+.fila-condicion button {
     padding: 7px 10px;
     border: 1px solid #dce2ea;
     border-radius: 7px;
@@ -511,9 +588,6 @@ header {
     }
 }
 
-
-/* VENTANAS DE EDICIÓN */
-
 #ventanaHorarios,
 #ventanaEditarAlumno,
 #ventanaEditarHorario {
@@ -526,6 +600,21 @@ header {
     border: 1px solid #dce2ea;
     border-radius: 14px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* POPUP DE EDICIÓN DE ALUMNOS */
+
+#ventanaEditarAlumno {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    width: calc(100% - 30px);
+    max-width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0;
 }
 
 #ventanaHorarios h3,
@@ -1677,10 +1766,13 @@ header {
     ⏰ Días y horarios de cursada
 </button>
 
+<button type="button" onclick="mostrarCondiciones()">
+    🏷️ Condición
+</button>
+
 <button type="button" onclick="mostrarAlumnosCurso()">
     👥 Alumnos
 </button>
-
 
 <button type="button" onclick="mostrarDiasEspeciales()">
     📌 Días especiales
@@ -1818,8 +1910,6 @@ header {
 
 </div>
 
-
-
 <!-- FORMULARIO ALUMNOS -->
 <div id="formularioAlumnosCurso" style="display:none;">
 
@@ -1829,12 +1919,26 @@ header {
 
     <div id="contenedorAlumnos">
 
-        <label for="nombreAlumno">Nombre</label>
-        <input type="text" id="nombreAlumno" placeholder="Nombre del alumno">
-
         <label for="apellidoAlumno">Apellido</label>
-        <input type="text" id="apellidoAlumno" placeholder="Apellido del alumno">
+        <input type="text" id="apellidoAlumno">
 
+        <label for="nombreAlumno">Nombre</label>
+        <input type="text" id="nombreAlumno">
+
+        <label for="condicionAlumno">Condición</label>
+
+        <div class="selector-condiciones">
+
+            <select id="condicionAlumno">
+                <option value="">Seleccionar</option>
+                <option value="C">C</option>
+                <option value="I">I</option>
+                <option value="R">R</option>
+            </select>
+
+        </div>
+
+        
         <button type="button" onclick="agregarAlumno()">
             ➕ Agregar alumno
         </button>
@@ -1843,29 +1947,83 @@ header {
 
     </div>
 
-    <!-- VENTANA DE EDICIÓN DE ALUMNOS -->
-    <div id="ventanaEditarAlumno" style="display:none;">
+</div>
 
-        <h3>✏️ Editar alumno</h3>
+<!-- FORMULARIO DE CONDICIONES -->
+ 
+<div id="formularioCondiciones" style="display:none;">
 
-        <label for="editarNombreAlumno">Nombre</label>
-        <input type="text" id="editarNombreAlumno">
+    <h2>🏷️ Condición</h2>
 
-        <label for="editarApellidoAlumno">Apellido</label>
-        <input type="text" id="editarApellidoAlumno">
+    <table>
 
-        <button type="button" onclick="guardarEdicionAlumno()">
-            Guardar cambios
-        </button>
+<thead>
+    <tr>
+        <th>Inicial</th>
+        <th>Significado</th>
+        <th>Acciones</th>
+    </tr>
+</thead>
+        <tbody id="tablaCondiciones">
+        </tbody>
+    </table>
 
-        <button type="button" onclick="cerrarEdicionAlumno()">
-            Cancelar
-        </button>
-
-    </div>
+    <button type="button" onclick="agregarCondicion()">
+        ➕ Agregar
+    </button>
 
 </div>
 
+<!-- VENTANA DE EDICIÓN DE ALUMNOS -->
+<div id="ventanaEditarAlumno" style="display:none;">
+
+    <h3>✏️ Editar alumno</h3>
+
+    <label for="editarNombreAlumno">Nombre</label>
+    <input type="text" id="editarNombreAlumno">
+
+    <label for="editarApellidoAlumno">Apellido</label>
+    <input type="text" id="editarApellidoAlumno">
+
+    <label for="editarCondicionAlumno">Condición</label>
+
+    <select id="editarCondicionAlumno">
+        <option value="">Seleccionar condición</option>
+        <option value="C">C</option>
+        <option value="I">I</option>
+        <option value="R">R</option>
+    </select>
+
+    <button type="button" onclick="guardarEdicionAlumno()">
+        Guardar cambios
+    </button>
+
+    <button type="button" onclick="cerrarEdicionAlumno()">
+        Cancelar
+    </button>
+
+</div>
+
+<!-- VENTANA DE EDICIÓN DE CONDICIONES -->
+<div id="ventanaEditarCondicion" style="display:none;">
+
+    <h3 id="tituloVentanaCondicion">🏷️ Condición</h3>
+
+    <label for="inicialCondicion">Inicial</label>
+    <input type="text" id="inicialCondicion" maxlength="3">
+
+    <label for="significadoCondicion">Significado</label>
+    <input type="text" id="significadoCondicion">
+
+    <button type="button" onclick="guardarCondicion()">
+        Guardar cambios
+    </button>
+
+    <button type="button" onclick="cerrarVentanaCondicion()">
+        Cancelar
+    </button>
+
+</div>
 
 <!-- FORMULARIO DÍAS ESPECIALES -->
 <div id="formularioDiasEspeciales" style="display:none;">
@@ -2530,6 +2688,7 @@ const formularioCursoMateria = document.getElementById("formularioCursoMateria")
 const formularioFechaInicio = document.getElementById("formularioFechaInicio");
 const formularioFechaFinalizacion = document.getElementById("formularioFechaFinalizacion");
 const formularioDiasHorarios = document.getElementById("formularioDiasHorarios");
+const formularioCondiciones = document.getElementById("formularioCondiciones");
 const formularioAlumnosCurso = document.getElementById("formularioAlumnosCurso");
 const formularioDiasEspeciales = document.getElementById("formularioDiasEspeciales");
 
@@ -2540,6 +2699,7 @@ if (
     formularioFechaInicio.style.display === "block" ||
     formularioFechaFinalizacion.style.display === "block" ||
     formularioDiasHorarios.style.display === "block" ||
+    formularioCondiciones.style.display === "block" ||
     formularioAlumnosCurso.style.display === "block" ||
     formularioDiasEspeciales.style.display === "block"
 ) {
@@ -2592,6 +2752,15 @@ let planillaSeleccionada = "";
 let basesAlumnos = {};
 
 let alumnosCursoActual = [];
+
+// CONDICIONES DISPONIBLES
+
+let condicionesDisponibles = [
+
+    { id: "C", nombre: "Cursa" },
+    { id: "I", nombre: "Intensifica" },
+    { id: "R", nombre: "Recursa" }
+];
 
 
 // HORARIOS DE CURSADA
@@ -3049,36 +3218,79 @@ function agregarAlumno() {
 
     const nombre = document.getElementById("nombreAlumno").value.trim();
     const apellido = document.getElementById("apellidoAlumno").value.trim();
+    const condicion = document.getElementById("condicionAlumno").value;
 
-    if (!nombre || !apellido) {
-        alert("Completá el nombre y apellido del alumno.");
-        return;
-    }
+   if (!nombre || !apellido || !condicion) {
+
+    mostrarConfirmacion(
+        "Datos incompletos",
+        "Completá el nombre, apellido y condición del alumno.",
+        null,
+        true
+    );
+
+    return;
+}
 
     alumnosCursoActual.push({
-        nombre: nombre,
-        apellido: apellido
+        nombre: nombre
+            .toLocaleLowerCase("es-AR")
+            .replace(/(^|\s)\p{L}/gu, letra => letra.toLocaleUpperCase("es-AR")),
+
+        apellido: apellido.toLocaleUpperCase("es-AR"),
+        condicion: condicion
     });
 
     document.getElementById("nombreAlumno").value = "";
     document.getElementById("apellidoAlumno").value = "";
+    document.getElementById("condicionAlumno").value = "";
 
     mostrarAlumnos();
+    guardarBorradorCurso();
 }
+
 function mostrarAlumnos() {
 
     const lista = document.getElementById("listaAlumnos");
 
     lista.innerHTML = "";
 
-    alumnosCursoActual.forEach((alumno, indice) => {
+    const alumnosOrdenados = alumnosCursoActual
+        .map((alumno, indiceOriginal) => ({
+            ...alumno,
+            indiceOriginal
+        }))
+        .sort((a, b) => {
+
+            const ordenApellido = a.apellido.localeCompare(
+                b.apellido,
+                "es",
+                { sensitivity: "base" }
+            );
+
+            if (ordenApellido !== 0) return ordenApellido;
+
+            return a.nombre.localeCompare(
+                b.nombre,
+                "es",
+                { sensitivity: "base" }
+            );
+        });
+
+    alumnosOrdenados.forEach((alumno, indice) => {
 
         const fila = document.createElement("div");
         fila.className = "fila-alumno";
 
         const nombre = document.createElement("span");
+
         nombre.textContent = (indice + 1) + ". " +
-            alumno.apellido + ", " + alumno.nombre;
+            alumno.apellido.toLocaleUpperCase("es-AR") +
+            ", " + alumno.nombre;
+
+        const condicion = document.createElement("span");
+        condicion.className = "condicion-alumno";
+        condicion.textContent = alumno.condicion || "Sin condición";
 
         const acciones = document.createElement("div");
         acciones.className = "acciones-horario";
@@ -3087,18 +3299,19 @@ function mostrarAlumnos() {
         editar.type = "button";
         editar.textContent = "✏️";
         editar.title = "Editar alumno";
-        editar.onclick = () => editarAlumno(indice);
+        editar.onclick = () => editarAlumno(alumno.indiceOriginal);
 
         const eliminar = document.createElement("button");
         eliminar.type = "button";
         eliminar.textContent = "🗑️";
         eliminar.title = "Eliminar alumno";
-        eliminar.onclick = () => eliminarAlumno(indice);
+        eliminar.onclick = () => eliminarAlumno(alumno.indiceOriginal);
 
         acciones.appendChild(editar);
         acciones.appendChild(eliminar);
 
         fila.appendChild(nombre);
+        fila.appendChild(condicion);
         fila.appendChild(acciones);
 
         lista.appendChild(fila);
@@ -3106,6 +3319,7 @@ function mostrarAlumnos() {
 }
 
 let indiceAlumnoEditando = null;
+let indiceCondicionEditando = null;
 
 function editarAlumno(indice) {
 
@@ -3115,6 +3329,7 @@ function editarAlumno(indice) {
 
     document.getElementById("editarNombreAlumno").value = alumno.nombre;
     document.getElementById("editarApellidoAlumno").value = alumno.apellido;
+    document.getElementById("editarCondicionAlumno").value = alumno.condicion || "";
 
     document.getElementById("ventanaEditarAlumno").style.display = "block";
 }
@@ -3132,17 +3347,173 @@ function guardarEdicionAlumno() {
 
     const nombre = document.getElementById("editarNombreAlumno").value.trim();
     const apellido = document.getElementById("editarApellidoAlumno").value.trim();
+    const condicion = document.getElementById("editarCondicionAlumno").value;
 
-    if (!nombre || !apellido) {
-        alert("Completá el nombre y apellido del alumno.");
+    if (!nombre || !apellido || !condicion) {
+
+        mostrarConfirmacion(
+            "Datos incompletos",
+            "Completá el nombre, apellido y condición del alumno.",
+            null,
+            true
+        );
+
         return;
     }
 
-    alumnosCursoActual[indiceAlumnoEditando].nombre = nombre;
-    alumnosCursoActual[indiceAlumnoEditando].apellido = apellido;
+    alumnosCursoActual[indiceAlumnoEditando].nombre = nombre
+        .toLocaleLowerCase("es-AR")
+        .replace(/(^|\s)\p{L}/gu, letra =>
+            letra.toLocaleUpperCase("es-AR")
+        );
+
+    alumnosCursoActual[indiceAlumnoEditando].apellido =
+        apellido.toLocaleUpperCase("es-AR");
+
+    alumnosCursoActual[indiceAlumnoEditando].condicion = condicion;
+
+    guardarBorradorCurso();
 
     mostrarAlumnos();
     cerrarEdicionAlumno();
+}
+
+// VENTANA DE CONDICIONES
+
+function agregarCondicion() {
+
+    indiceCondicionEditando = null;
+
+    document.getElementById("tituloVentanaCondicion").textContent =
+        "🏷️ Agregar condición";
+
+    document.getElementById("inicialCondicion").value = "";
+    document.getElementById("significadoCondicion").value = "";
+
+    document.getElementById("ventanaEditarCondicion").style.display = "block";
+}
+
+
+function editarCondicion(indice) {
+
+    indiceCondicionEditando = indice;
+
+    const condicion = condicionesDisponibles[indice];
+
+    document.getElementById("tituloVentanaCondicion").textContent =
+        "✏️ Editar condición";
+
+    document.getElementById("inicialCondicion").value = condicion.id;
+    document.getElementById("significadoCondicion").value = condicion.nombre;
+
+    document.getElementById("ventanaEditarCondicion").style.display = "block";
+}
+
+
+function cerrarVentanaCondicion() {
+
+    document.getElementById("ventanaEditarCondicion").style.display = "none";
+
+    indiceCondicionEditando = null;
+}
+function guardarCondicion() {
+
+    const inicial = document.getElementById("inicialCondicion").value
+        .trim()
+        .toUpperCase();
+
+    const significado = document.getElementById("significadoCondicion").value
+        .trim();
+
+    if (!inicial || !significado) {
+
+        mostrarConfirmacion(
+            "Datos incompletos",
+            "Completá la inicial y el significado de la condición.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    if (condicionesDisponibles.some((condicion, indice) =>
+        condicion.id === inicial && indice !== indiceCondicionEditando
+    )) {
+
+        mostrarConfirmacion(
+            "Inicial existente",
+            "Ya existe una condición con esa inicial.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    let inicialAnterior = null;
+    let alumnosAsociados = [];
+
+    if (indiceCondicionEditando !== null) {
+
+        inicialAnterior =
+            condicionesDisponibles[indiceCondicionEditando].id;
+
+        alumnosAsociados = alumnosCursoActual.filter(
+            alumno => alumno.condicion === inicialAnterior
+        );
+    }
+
+    // Aplicar los cambios.
+    const aplicarCambios = () => {
+
+        if (indiceCondicionEditando === null) {
+
+            condicionesDisponibles.push({
+                id: inicial,
+                nombre: significado
+            });
+
+        } else {
+
+            // Actualizar los alumnos si cambia la inicial.
+            alumnosAsociados.forEach(alumno => {
+                alumno.condicion = inicial;
+            });
+
+            condicionesDisponibles[indiceCondicionEditando] = {
+                id: inicial,
+                nombre: significado
+            };
+        }
+
+        guardarBorradorCurso();
+        mostrarTablaCondiciones();
+        mostrarAlumnos();
+        cargarSelectoresCondiciones();
+        cerrarVentanaCondicion();
+    };
+
+    // Si cambia la inicial y hay alumnos asociados, pedir confirmación.
+    if (
+        indiceCondicionEditando !== null &&
+        inicial !== inicialAnterior &&
+        alumnosAsociados.length > 0
+    ) {
+
+        mostrarConfirmacion(
+            "Modificar condición",
+            "Vas a cambiar la inicial " + inicialAnterior +
+            " por " + inicial + ". Se actualizará automáticamente " +
+            "la condición de " + alumnosAsociados.length +
+            " alumno(s). ¿Querés continuar?",
+            aplicarCambios
+        );
+
+        return;
+    }
+
+    aplicarCambios();
 }
 
 // VENTANA COMÚN DE CONFIRMACIÓN
@@ -3192,10 +3563,53 @@ function eliminarAlumno(indice) {
         function () {
             alumnosCursoActual.splice(indice, 1);
             mostrarAlumnos();
+
+            guardarBorradorCurso();
+
         }
     );
 
 }
+
+function eliminarCondicion(indice) {
+
+    const condicion = condicionesDisponibles[indice];
+
+    const alumnosAsociados = alumnosCursoActual.filter(
+        alumno => alumno.condicion === condicion.id
+    );
+
+    // Impedir la eliminación si hay alumnos asociados.
+    if (alumnosAsociados.length > 0) {
+
+        mostrarConfirmacion(
+            "No se puede eliminar",
+            "La condición " + condicion.id + " - " + condicion.nombre +
+            " está asignada a " + alumnosAsociados.length +
+            " alumno(s). Primero tenés que renombrarla o cambiar la condición de esos alumnos.",
+            null,
+            true
+        );
+
+        return;
+    }
+
+    // Si no hay alumnos asociados, permitir eliminar.
+    mostrarConfirmacion(
+        "Eliminar condición",
+        "¿Querés eliminar la condición " + condicion.id + " - " + condicion.nombre + "?",
+        function () {
+
+            condicionesDisponibles.splice(indice, 1);
+
+            mostrarTablaCondiciones();
+            cargarSelectoresCondiciones();
+            guardarBorradorCurso();
+
+        }
+    );
+}
+
 
 // ================================
 // DÍAS ESPECIALES
@@ -3414,6 +3828,60 @@ function mostrarAlumnosCurso() {
     document.getElementById("menuOpcionesConfiguracion").style.display = "none";
     document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
     document.getElementById("formularioAlumnosCurso").style.display = "block";
+       
+}
+
+function mostrarCondiciones() {
+    document.getElementById("menuOpcionesConfiguracion").style.display = "none";
+    document.getElementById("contenidoConfiguracionAnterior").style.display = "none";
+    document.getElementById("formularioCondiciones").style.display = "block";
+
+    mostrarTablaCondiciones();
+}
+
+
+function mostrarTablaCondiciones() {
+
+    const tabla = document.getElementById("tablaCondiciones");
+    tabla.innerHTML = "";
+
+    condicionesDisponibles.forEach((condicion, indice) => {
+
+        const fila = document.createElement("tr");
+
+        const inicial = document.createElement("td");
+        inicial.textContent = condicion.id;
+
+        const significado = document.createElement("td");
+        significado.textContent = condicion.nombre;
+        const acciones = document.createElement("td");
+
+        const contenedorAcciones = document.createElement("div");
+        contenedorAcciones.className = "acciones-horario";
+
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.textContent = "✏️";
+        editar.title = "Editar condición";
+        editar.onclick = () => editarCondicion(indice);
+
+        const eliminar = document.createElement("button");
+        eliminar.type = "button";
+        eliminar.textContent = "🗑️";
+        eliminar.title = "Eliminar condición";
+        eliminar.onclick = () => eliminarCondicion(indice);
+
+        contenedorAcciones.appendChild(editar);
+        contenedorAcciones.appendChild(eliminar);
+
+        acciones.appendChild(contenedorAcciones);
+
+        fila.appendChild(inicial);
+        fila.appendChild(significado);
+        fila.appendChild(acciones);
+
+        tabla.appendChild(fila);
+    });
 }
 
 function mostrarDiasEspeciales() {
@@ -3429,6 +3897,7 @@ function volverMenuConfiguracion() {
     document.getElementById("formularioFechaInicio").style.display = "none";
     document.getElementById("formularioFechaFinalizacion").style.display = "none";
     document.getElementById("formularioDiasHorarios").style.display = "none";
+    document.getElementById("formularioCondiciones").style.display = "none";
     document.getElementById("formularioAlumnosCurso").style.display = "none";
     document.getElementById("formularioDiasEspeciales").style.display = "none";
 
@@ -3482,6 +3951,7 @@ function guardarBorradorCurso() {
 
         horariosCursada: horariosCursada,
         alumnosCursoActual: alumnosCursoActual,
+        condicionesDisponibles: condicionesDisponibles,
         diasEspeciales: diasEspeciales
     };
 
@@ -3529,6 +3999,25 @@ function recuperarBorradorCurso() {
         horariosCursada = borrador.horariosCursada || {};
 
         alumnosCursoActual = borrador.alumnosCursoActual || [];
+        condicionesDisponibles = borrador.condicionesDisponibles || [
+            { id: "C", nombre: "Cursa" },
+            { id: "I", nombre: "Intensifica" },
+            { id: "R", nombre: "Recursa" }
+        ];
+
+        condicionesDisponibles = condicionesDisponibles.map(condicion => {
+
+            const nombresIniciales = {
+                C: "Cursa",
+                I: "Intensifica",
+                R: "Recursa"
+            };
+
+            return {
+                ...condicion,
+                nombre: nombresIniciales[condicion.id] || condicion.nombre
+            };
+        });
 
         diasEspeciales = borrador.diasEspeciales || [];
 
@@ -3564,10 +4053,42 @@ function recuperarBorradorCurso() {
 
 });
 
+function cargarSelectoresCondiciones() {
+
+    const selectores = [
+        document.getElementById("condicionAlumno"),
+        document.getElementById("editarCondicionAlumno")
+    ];
+
+    selectores.forEach((selector, indice) => {
+
+        const textoInicial = indice === 0
+            ? "Seleccionar"
+            : "Seleccionar condición";
+
+        selector.innerHTML = "";
+
+        const opcionInicial = document.createElement("option");
+        opcionInicial.value = "";
+        opcionInicial.textContent = textoInicial;
+        selector.appendChild(opcionInicial);
+
+        condicionesDisponibles.forEach(condicion => {
+
+            const opcion = document.createElement("option");
+            opcion.value = condicion.id;
+            opcion.textContent = condicion.id;
+
+            selector.appendChild(opcion);
+        });
+    });
+}
+
 
 // Recuperar el borrador al iniciar la aplicación.
 
 recuperarBorradorCurso();
+cargarSelectoresCondiciones();
 
 
   </script>
